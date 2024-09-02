@@ -1,0 +1,14 @@
+streamlit
+streamlit-echarts
+pandas
+numpy
+scikit-learn
+nltk
+pygsheets
+streamlit-lottie
+plotly
+wordcloud
+matplotlib
+seaborn
+scipy
+openai
