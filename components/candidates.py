@@ -16,6 +16,9 @@ def display_candidates(data):
             # Verificar si el candidato está seleccionado
             is_selected = st.session_state.get('selected_candidate') == candidate
 
+            st.markdown('<h2>POSTULACIONES</h2>', unsafe_allow_html=True)
+
+
             with st.expander("Ver Nombre"):
                 st.markdown(f"""{candidate['Nombre']}""", unsafe_allow_html=True)
             # Botón centrado
