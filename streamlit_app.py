@@ -5,6 +5,7 @@ import pandas as pd
 from nltk.corpus import stopwords
 import nltk
 from components.comparison import get_gpt_explanation
+from display_candidates import display_candidates
 from components.job_offers import display_job_offers
 from google_sheets import read_sheet
 from utills.visualization import display_bar_chart
