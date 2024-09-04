@@ -132,10 +132,10 @@ def main():
 
     try:
         # Cargar datos de ofertas y candidatos
-        worksheet_jobs = read_sheet(credentials= config.credentials,range_val='Hoja 1')
+        worksheet_jobs = read_sheet(credentials=config.credentials, range_val='Hoja 1')
         job_offers_data = worksheet_jobs
         
-        worksheet_candidates = read_sheet(credentials=config.credentials,range_val='Hoja 2')
+        worksheet_candidates = read_sheet(credentials=config.credentials, range_val='Hoja 2')
         candidates_data = worksheet_candidates
         
         # Mostrar ofertas y candidatos
@@ -144,8 +144,6 @@ def main():
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<br><br>", unsafe_allow_html=True)
 
-
-        
         display_candidates(candidates_data)
         st.markdown("<br><br>", unsafe_allow_html=True)
 
@@ -162,8 +160,8 @@ def main():
             {st.session_state.selected_candidate}
             
             Basándonos en la información de la oferta {st.session_state.selected_offer} y en el de la candidatura {st.session_state.selected_candidate}, opinamos si la oferta se ajusta al perfil del candidato.
-            Si la la oferta  se ajusta al perfil de la candidatura enseña un numero y un correo para poder ponerse en contacto con el candidato, no con la empresa que oferta el trabajo.
-            No me tienes que dar un resumen del contenido de la oferta y la cnadidatura si no una conclusion desarrollado argumentando muy bien si la candidatura se ajusta bien a la oferta
+            Si la oferta se ajusta al perfil de la candidatura enseña un número y un correo para poder ponerse en contacto con el candidato, no con la empresa que oferta el trabajo.
+            No me tienes que dar un resumen del contenido de la oferta y la candidatura sino una conclusión desarrollada argumentando muy bien si la candidatura se ajusta bien a la oferta.
             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
@@ -177,59 +175,79 @@ def main():
             st.markdown('<h3 class="section-title">¿Qué es el PLN y la similitud textual?</h3>', unsafe_allow_html=True)
 
             gpt_opinion_prompt2 = f"""
-
-             Eres un científico de datos profesional y tienes que  explicar de forma resumida y para todos los públicos qué es el procesamiento de lenguaje natural (PLN)
+             Eres un científico de datos profesional y tienes que explicar de forma resumida y para todos los públicos qué es el procesamiento de lenguaje natural (PLN)
              y cómo podemos comparar la similitud de dos textos mediante herramientas de PLN.
 
-             Además tienes que decir que se va a mostrar la similitud textual entre la oferta y candidatura seleccionada. Debes mencionar brvemente que
-             para comparar la similitud de los dos textos, utilizamos técnicas de PLN como la tokenización, la vectorización y el cálculo de la distancia entre vectores.
+             Además tienes que decir que se va a mostrar la similitud textual entre la oferta y candidatura seleccionada. Debes mencionar brevemente que
+             para comparar la similitud de los dos textos, utilizamos técnicas de PLN como la tokenización, la vectorización y el cálculo de la distancia entre vectores,
              las cuales son técnicas que nos permiten cuantificar la similitud entre los textos de manera precisa y objetiva.
 
              Debes explicar que puede haber casos en los que haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos
-             de las ofertas debido a como se ha redactado la candidatura y los terminos usados
+             de las ofertas debido a cómo se ha redactado la candidatura y los términos usados.
 
-
-
-            
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion2 = get_gpt_explanation(gpt_opinion_prompt2)
 
             st.markdown(f'<div class="gpt-output">{gpt_opinion2}</div>', unsafe_allow_html=True)
 
-            
             # Mostrar resultados en tarjetas centradas
             st.markdown(f"""
             <div class="comparison-result" style="display: flex; justify-content: center;">
                 <div class="comparison-card offer-card" style="margin: 0 10px;">
-                    
                     <h3>{similarity:.2f}</h3>
                     <p class="info-trigger">Ver información completa</p>
                 </div>
-
-              
             </div>
             """, unsafe_allow_html=True)
 
-
-
             gpt_opinion_prompt3 = f"""
-
              Eres un científico de datos profesional y tienes que sacar conclusiones del porcentaje de similitud textual obtenido entre el texto
-             de la oferta y el de la candidatura: {similarity}. Recuerda evitar sacar conclusiones relaiconadas con que el candidaot no se ajusta a la oferta, ya que puede haber casos en los que
-                haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos de las ofertas debido a como se ha redactado la candidatura y los terminos usados
+             de la oferta y el de la candidatura: {similarity}. Recuerda evitar sacar conclusiones relacionadas con que el candidato no se ajusta a la oferta, ya que puede haber casos en los que
+             haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos de las ofertas debido a cómo se ha redactado la candidatura y los términos usados.
 
-
-
-            
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
             st.markdown(f'<div class="gpt-output">{gpt_opinion3}</div>', unsafe_allow_html=True)
 
+            # Incluir la idea del radar
+            radar_data = [
+                {"name": term, "oferta": offer_score * 100, "candidato": candidate_score * 100}
+                for term, (offer_score, candidate_score) in top_terms
+            ]
+
+            options = {
+                "title": {"text": "Comparación de Términos Clave", "textStyle": {"color": "#2c3e50"}},
+                "legend": {"data": ["Oferta", "Candidato"], "textStyle": {"color": "#34495e"}},
+                "radar": {
+                    "indicator": [{"name": item["name"], "max": 100} for item in radar_data],
+                    "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
+                },
+                "series": [{
+                    "type": "radar",
+                    "data": [
+                        {
+                            "value": [item["oferta"] for item in radar_data],
+                            "name": "Oferta",
+                            "itemStyle": {"color": "#4CAF50"},
+                            "areaStyle": {"color": "rgba(76,175,80,0.3)"}
+                        },
+                        {
+                            "value": [item["candidato"] for item in radar_data],
+                            "name": "Candidato",
+                            "itemStyle": {"color": "#2196F3"},
+                            "areaStyle": {"color": "rgba(33,150,243,0.3)"}
+                        }
+                    ]
+                }]
+            }
+
+            st_echarts(options=options, height="500px")
 
     except Exception as e:
         st.error(f"Error al cargar los datos: {e}")
 
 if __name__ == "__main__":
     main()
+
