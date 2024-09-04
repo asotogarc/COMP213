@@ -70,7 +70,7 @@ st.markdown("""
         border: 1px solid #1E3A8A;
     }
     .stats-table th {
-        background-color: #1E3A8A;
+        background-color: #f79b77;
         color: white;
     }
        .reportview-container {
