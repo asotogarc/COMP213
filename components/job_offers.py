@@ -48,8 +48,8 @@ def display_job_offers(data):
             with st.expander("Ver Formación"):
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h3>Formación</h3>
-                    <h2>{offer['Formación']}</h2>
+                    <h2>Formación</h2>
+                    <h3>{offer['Formación']}</h3>
                 </div>
                 """, unsafe_allow_html=True)
             
