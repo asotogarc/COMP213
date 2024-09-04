@@ -11,7 +11,7 @@ def display_candidates(data):
     
     st.markdown('<h2>POSTULACIONES</h2>', unsafe_allow_html=True)
     
-    # Estilo CSS personalizado con animación
+    # Estilo CSS personalizado con animación y ajuste automático de altura
     st.markdown("""
     <style>
     @keyframes fadeIn {
@@ -28,32 +28,32 @@ def display_candidates(data):
         justify-content: space-between;
     }
     .card-title {
-        height: 80px;  /* Altura aumentada para el título */
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        background-color: #007bff;  /* Color de fondo verde */
-        border-radius: 5px 5px 0 0;  /* Bordes redondeados solo arriba */
+        background-color: #007bff;
+        border-radius: 5px 5px 0 0;
     }
     .card-title h3 {
         margin: 0;
         text-align: center;
-        font-size: 18px;  /* Tamaño de fuente aumentado */
+        font-size: 18px;
         line-height: 1.3;
-        color: white;  /* Texto en blanco */
+        color: white;
         padding: 10px;
     }
     .card-content {
-        height: 60px;
         overflow-y: auto;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 10px;
     }
     .card-content p {
         margin: 0;
-        text-align: center;
+        text-align: left;
         animation: fadeIn 0.5s ease-in;
     }
     .stExpander {
