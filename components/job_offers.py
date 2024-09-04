@@ -31,7 +31,7 @@ def display_job_offers(data):
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        background-color: #e9ecef;
+        background-color: #556dac;  /* Cambiado el color de fondo */
         border-radius: 5px;
         padding: 10px;
     }
@@ -41,7 +41,7 @@ def display_job_offers(data):
         font-size: 18px;  /* Aumentado el tamaño de la fuente */
         line-height: 1.3;
         font-weight: bold;
-        color: #333;
+        color: #fff;  /* Cambiado el color del texto a blanco */
     }
     .card-content {
         height: 70px;
