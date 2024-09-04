@@ -37,53 +37,42 @@ def display_job_offers(data):
                 </div>
                 """, unsafe_allow_html=True)
             
-            with st.container():
+            # Botón de selección espaciado y debajo de los expanders
+            if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar'} Oferta", key=f"offer_{i}"):
+                if is_selected:
+                    st.session_state.selected_offer = None
+                else:
+                    st.session_state.selected_offer = offer
+                st.rerun()
+            
+            with st.expander("Ver Formación"):
+                st.markdown(f"""
+                <div class="{card_class}">
+                    <h3>Formación</h3>
+                    <p>{offer['Formación']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with st.expander("Ver Funciones"):
                 st.markdown(f"""
                 <div class="{card_class}">
                     <h3>Funciones</h3>
                     <p>{offer['Funciones']}</p>
                 </div>
                 """, unsafe_allow_html=True)
-                
-                # Botón de selección espaciado y debajo de los expanders
-                if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar'} Oferta", key=f"offer_{i}"):
-                    if is_selected:
-                        st.session_state.selected_offer = None
-                    else:
-                        st.session_state.selected_offer = offer
-                    st.rerun()
-                
-                # Usar un expander de Streamlit para las funciones
-                with st.expander("Ver Formación"):
-                    st.markdown(f"""
-                    <div class="{card_class}">
-                        <h3>Formación</h3>
-                        <p>{offer['Formación']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with st.expander("Ver Funciones", expanded=False):
-                    st.markdown(f"""
-                    <div class="{card_class}">
-                        <h3>Funciones</h3>
-                        <p>{offer['Funciones']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                # Expander para los conocimientos
-                with st.expander("Ver Conocimientos"):
-                    st.markdown(f"""
-                    <div class="{card_class}">
-                        <h3>Conocimientos</h3>
-                        <p>{offer['Conocimientos']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                # Expander para la localidad
-                with st.expander("Ver Localidad"):
-                    st.markdown(f"""
-                    <div class="{card_class}">
-                        <h3>Localidad</h3>
-                        <p>{offer['Localidad']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+            
+            with st.expander("Ver Conocimientos"):
+                st.markdown(f"""
+                <div class="{card_class}">
+                    <h3>Conocimientos</h3>
+                    <p>{offer['Conocimientos']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with st.expander("Ver Localidad"):
+                st.markdown(f"""
+                <div class="{card_class}">
+                    <h3>Localidad</h3>
+                    <p>{offer['Localidad']}</p>
+                </div>
+                """, unsafe_allow_html=True)
