@@ -47,14 +47,7 @@ def display_candidates(data):
     """, unsafe_allow_html=True)
     cols = st.columns(n_samples)
     for i, (candidate, col) in enumerate(zip(st.session_state.candidates, cols)):
-        
-        with st.expander("Ver Nombre del candidato"):
-                st.markdown(f"""
-                <div class="expander-content">
-                    <h3>Ubicación</h3>
-                    <p>{candidate['Nombre']}</p>
-                </div>
-
+     
             </div>
             """, unsafe_allow_html=True)
             # Botón centrado
