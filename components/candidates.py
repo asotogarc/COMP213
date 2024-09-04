@@ -30,7 +30,7 @@ def display_candidates(data):
             # Expander para los conocimientos
             with st.expander("Ver Conocimientos"):
                 st.markdown(f"""
-                Conocimientos
+                
                 
                 {candidate['Conocimientos']}
                 """, unsafe_allow_html=True)
@@ -38,7 +38,7 @@ def display_candidates(data):
             # Expander para la experiencia
             with st.expander("Ver Experiencia"):
                 st.markdown(f"""
-                Experiencia
+                
                 
                 {candidate['Experiencia']}
                 """, unsafe_allow_html=True)
