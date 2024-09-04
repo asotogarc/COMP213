@@ -53,8 +53,7 @@ def display_candidates(data):
             st.markdown(f"""
             <div class="{card_class}">
                 <h2>{candidate['Nombre']}</h2>
-                <h3>Formación</h3>
-                <p>{candidate['Formación']}</p>
+              
                 <h3>Idiomas</h3>
                 <p>{candidate['Idiomas']}</p>
                 <h3>Localidad</h3>
@@ -73,6 +72,15 @@ def display_candidates(data):
                         st.session_state.selected_candidate = candidate
                     st.rerun()
 
+# Expander para los conocimientos
+            with st.expander("Ver Conocimientos"):
+                st.markdown(f"""
+                <div class="expander-content">
+                    <h3>Formación</h3>
+                    <p>{candidate['Formación']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+
             # Expander para los conocimientos
             with st.expander("Ver Conocimientos"):
                 st.markdown(f"""
@@ -88,5 +96,14 @@ def display_candidates(data):
                 <div class="expander-content">
                     <h3>Experiencia</h3>
                     <p>{candidate['Experiencia']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+
+                    # Expander para la experiencia
+            with st.expander("Ver Experiencia"):
+                st.markdown(f"""
+                <div class="expander-content">
+                    <h3>Ubicación</h3>
+                    <p>{candidate['Localidad'],candidate['Provincia']}</p>
                 </div>
                 """, unsafe_allow_html=True)
