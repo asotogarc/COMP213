@@ -64,7 +64,7 @@ def display_candidates(data):
                 st.markdown(f"""
                 
                 
-                {candidate['Localidad'],candidate['Provincia']}
+                {candidate['Localidad']}
                 """, unsafe_allow_html=True)
 
                         # Expander para la experiencia
