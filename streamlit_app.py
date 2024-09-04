@@ -82,6 +82,7 @@ st.markdown("""
         .stDeployButton {display:none;}
         #stDecoration {display:none;}
         header {visibility: hidden;}
+        footer {visibility: hidden;}
         [data-testid="stToolbar"] {visibility: hidden !important;}
 
       .comparison-result {
