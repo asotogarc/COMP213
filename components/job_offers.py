@@ -41,11 +41,8 @@ def display_job_offers(data):
             with st.container():
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2>
-                    <div class="offer-details">
-                 
-                    </div>
-                </div>
+#                    <h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2>
+              
                 """, unsafe_allow_html=True)
                  # Botón de selección espaciado y debajo de los expanders
                 st.markdown('<div class="select-button">', unsafe_allow_html=True)
