@@ -1,6 +1,6 @@
 import streamlit as st
 
-def display_candidates(data):
+def b(data):
     if 'candidates' not in st.session_state:
         st.session_state.candidates = data.sample(n=min(3, len(data))).to_dict('records')
     
