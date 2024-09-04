@@ -25,10 +25,18 @@ def display_job_offers(data):
     }
     .card h3 {
         margin-top: 0;
+        text-align: center;
     }
     .card-content {
-        height: 100px;
+        height: 60px;
         overflow-y: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .card-content p {
+        margin: 0;
+        text-align: center;
     }
     </style>
     """, unsafe_allow_html=True)
