@@ -11,7 +11,8 @@ from google_sheets import read_sheet
 from utills.visualization import display_bar_chart
 from streamlit_echarts import st_echarts
 from utills.data_processing import calculate_similarity
-
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Configuración de la página
 st.set_page_config(page_title="NLPMatchJobs", layout="wide")
