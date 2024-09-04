@@ -9,6 +9,9 @@ def display_candidates(data):
         st.warning("No hay candidatos para mostrar.")
         return None
 
+
+    st.markdown('<h2>POSTULACIONES</h2>', unsafe_allow_html=True)
+
     cols = st.columns(n_samples)
     for i, (candidate, col) in enumerate(zip(st.session_state.candidates, cols)):
         with col:
@@ -16,7 +19,6 @@ def display_candidates(data):
             # Verificar si el candidato está seleccionado
             is_selected = st.session_state.get('selected_candidate') == candidate
 
-            st.markdown('<h2>POSTULACIONES</h2>', unsafe_allow_html=True)
 
 
             with st.expander("Ver Nombre"):
