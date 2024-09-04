@@ -28,17 +28,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Apply custom theme
-st.markdown("""
-    <style>
-    :root {
-        --primary-color: #4CAF50;
-        --background-color: #f0f2f6;
-        --secondary-background-color: #e0e0e0;
-        --text-color: #262730;
-        --font: sans-serif;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+
 # Enlazamos el archivo custom.css
 with open("styles/custom.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
