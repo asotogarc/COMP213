@@ -16,15 +16,72 @@ from streamlit_echarts import st_echarts
 st.set_page_config(page_title="NLPMatchJobs", layout="wide")
 
 st.markdown("""
-    <style>
-        .reportview-container {
+<style>
+    .reportview-container {
+        background: #f0f2f6
+    }
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    h1, h2, h3 {
+        color: #1E3A8A;
+        text-align: center;
+    }
+    .stButton>button {
+        background-color: #1E3A8A;
+        color: white;
+        display: block;
+        margin: 0 auto;
+    }
+    .stButton>button:hover {
+        background-color: #2563EB;
+    }
+    .centered {
+        display: flex;
+        justify-content: center;
+    }
+    .metrics-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .metric-item {
+        margin: 10px;
+        text-align: center;
+    }
+    .section-divider {
+        border-top: 2px solid #1E3A8A;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .stMetric {
+        text-align: center;
+    }
+    .stats-table {
+        margin: 0 auto;
+        width: 50%;
+    }
+    .stats-table th, .stats-table td {
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #1E3A8A;
+    }
+    .stats-table th {
+        background-color: #1E3A8A;
+        color: white;
+    }
+       .reportview-container {
             margin-top: -2em;
         }
         #MainMenu {visibility: hidden;}
         .stDeployButton {display:none;}
         footer {visibility: hidden;}
         #stDecoration {display:none;}
-    </style>
+        header {visibility: hidden;}
+        [data-testid="stToolbar"] {visibility: hidden !important;}
+</style>
 """, unsafe_allow_html=True)
 
 # Apply custom theme
