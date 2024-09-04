@@ -168,20 +168,59 @@ def main():
             st.markdown('<h2 class="section-title">¿ENCAJA EL CANDIDATO CON LA OFERTA?</h2>', unsafe_allow_html=True)
             st.markdown(f'<div class="gpt-output">{gpt_opinion}</div>', unsafe_allow_html=True)
             
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
+
+            st.markdown('<h2 class="section-title">DATA SCIENCE EINNOVA</h2>', unsafe_allow_html=True)
+            st.markdown('<h3 class="section-title">SIMILITUD TEXTUAL</h3>', unsafe_allow_html=True)
+
+             gpt_opinion_prompt2 = f"""
+
+             Eres un científico de datos profesional y tienes que  explicar de forma resumida y para todos los públicos qué es el procesamiento de lenguaje natural (PLN)
+             y cómo podemos comparar la similitud de dos textos mediante herramientas de PLN.
+
+             Además tienes que decir que se va a mostrar la similitud textual entre la oferta y candidatura seleccionada. Debes mencionar brvemente que
+             para comparar la similitud de los dos textos, utilizamos técnicas de PLN como la tokenización, la vectorización y el cálculo de la distancia entre vectores.
+             las cuales son técnicas que nos permiten cuantificar la similitud entre los textos de manera precisa y objetiva.
+
+             Debes explicar que puede haber casos en los que haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos
+             de las ofertas debido a como se ha redactado la candidatura y los terminos usados
+
+
+
+            
+             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
+            """
+            gpt_opinion2 = get_gpt_explanation(gpt_opinion_prompt2)
+
+            st.markdown(f'<div class="gpt-output">{gpt_opinion2}</div>', unsafe_allow_html=True)
+
             
             # Mostrar resultados en tarjetas centradas
             st.markdown(f"""
             <div class="comparison-result" style="display: flex; justify-content: center;">
                 <div class="comparison-card offer-card" style="margin: 0 10px;">
-                    <h3>SIMILITUD DE AMBOS TEXTOS</h3>
-                    <h4>{similarity:.2f}</h4>
+                    
+                    <h3>{similarity:.2f}</h3>
                     <p class="info-trigger">Ver información completa</p>
                 </div>
 
-                </div>
               
             </div>
             """, unsafe_allow_html=True)
+
+            gpt_opinion_prompt3 = f"""
+
+             Eres un científico de datos profesional y tienes que sacar conclusiones del porcentaje de similitud textual obtenido entre el texto
+             de la oferta y el de la candidatura: {similarity}
+
+
+
+            
+             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
+            """
+            gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
+            st.markdown(f'<div class="gpt-output">{gpt_opinion3}</div>', unsafe_allow_html=True)
 
 
     except Exception as e:
