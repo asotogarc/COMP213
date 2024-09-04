@@ -29,13 +29,12 @@ def display_job_offers(data):
             is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
             card_class = "card"
             
-            with st.expander("Ver Nombre Oferta"):
-                st.markdown(f"""
-                <div class="{card_class}">
-                    <h3>Nombre</h3>
-                    <p>{offer['Nombre']}</p>
-                </div>
-                """, unsafe_allow_html=True)
+            # Mostrar el nombre de la oferta directamente en la tarjeta
+            st.markdown(f"""
+            <div class="{card_class}">
+                <h3>{offer['Nombre']}</h3>
+            </div>
+            """, unsafe_allow_html=True)
             
             # Botón de selección espaciado y debajo de los expanders
             if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar'} Oferta", key=f"offer_{i}"):
