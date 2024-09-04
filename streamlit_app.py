@@ -224,6 +224,49 @@ def main():
             st.markdown(f'<div class="gpt-output">{gpt_opinion3}</div>', unsafe_allow_html=True)
 
 
+            # Add spider chart
+            st.markdown('<h3 class="section-title">Top 5 términos más importantes</h3>', unsafe_allow_html=True)
+            
+            # Prepare data for the spider chart
+            categories = [term for term, _ in top_terms[:5]]
+            values = [score for _, score in top_terms[:5]]
+            
+            fig = go.Figure(data=go.Scatterpolar(
+              r=values,
+              theta=categories,
+              fill='toself'
+            ))
+    
+            fig.update_layout(
+              polar=dict(
+                radialaxis=dict(
+                  visible=True,
+                  range=[0, max(values)]
+                )),
+              showlegend=False
+            )
+    
+            st.plotly_chart(fig)
+    
+            # Add comparison table
+            st.markdown('<h3 class="section-title">Comparación de términos importantes</h3>', unsafe_allow_html=True)
+            
+            # Calculate term frequencies for offer and candidate
+            offer_freq = {term: st.session_state.selected_offer.lower().count(term.lower()) for term, _ in top_terms[:5]}
+            candidate_freq = {term: st.session_state.selected_candidate.lower().count(term.lower()) for term, _ in top_terms[:5]}
+            
+            # Prepare data for the table
+            table_data = []
+            for term, _ in top_terms[:5]:
+                offer_percent = (offer_freq[term] / len(st.session_state.selected_offer.split())) * 100
+                candidate_percent = (candidate_freq[term] / len(st.session_state.selected_candidate.split())) * 100
+                difference = candidate_percent - offer_percent
+                table_data.append([term, f"{offer_percent:.2f}%", f"{candidate_percent:.2f}%", f"{difference:.2f}%"])
+            
+            df = pd.DataFrame(table_data, columns=['Término', 'Oferta (%)', 'Candidatura (%)', 'Diferencia (%)'])
+            st.table(df)
+
+
     except Exception as e:
         st.error(f"Error al cargar los datos: {e}")
 
