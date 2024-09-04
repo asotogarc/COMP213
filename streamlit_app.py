@@ -29,9 +29,7 @@ st.markdown("""
 
 # Apply custom theme
 
-# Enlazamos el archivo custom.css
-with open("styles/custom.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 
 # Descargar stopwords en español
 nltk.download('stopwords')
