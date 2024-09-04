@@ -56,7 +56,7 @@ def display_job_offers(data):
             with st.expander("Formación necesaria"):
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h4>{offer['Formación']}</h4>
+                    <h5>{offer['Formación']}</h5>
                     
                 </div>
                 """, unsafe_allow_html=True)
