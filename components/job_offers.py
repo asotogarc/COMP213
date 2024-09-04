@@ -19,6 +19,13 @@ def display_job_offers(data):
         padding: 10px;
         margin: 10px;
         border-radius: 5px;
+        height: 300px; /* Altura fija de los contenedores */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .card h3 {
+        margin-top: 0; /* Eliminar margen superior del título */
     }
     </style>
     """, unsafe_allow_html=True)
