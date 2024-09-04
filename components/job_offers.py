@@ -1,95 +1,63 @@
 import streamlit as st
 
-def display_job_offers(data):
-    if 'job_offers' not in st.session_state:
-        st.session_state.job_offers = data.sample(n=min(3, len(data))).to_dict('records')
+def display_candidates(data):
+    if 'candidates' not in st.session_state:
+        st.session_state.candidates = data.sample(n=min(3, len(data))).to_dict('records')
     
-    n_samples = len(st.session_state.job_offers)
+    n_samples = len(st.session_state.candidates)
     if n_samples == 0:
-        st.warning("No hay ofertas de trabajo para mostrar.")
+        st.warning("No hay candidatos para mostrar.")
         return None
     
-    st.markdown('<h2>OFERTAS DE TRABAJO</h2>', unsafe_allow_html=True)
+    st.markdown('<h2>POSTULACIONES</h2>', unsafe_allow_html=True)
     
-    # Estilo CSS personalizado
-    st.markdown("""
-    <style>
-    .card {
-        border: 1px solid #ddd;
-        padding: 10px;
-        margin: 10px;
-        border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .card-title {
-        height: 60px;  /* Altura fija para el título */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .card-title h3 {
-        margin: 0;
-        text-align: center;
-        font-size: 14px;  /* Ajusta el tamaño de la fuente según sea necesario */
-        line-height: 1.2;  /* Ajusta el espaciado entre líneas */
-    }
-    .card-content {
-        height: 60px;
-        overflow-y: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .card-content p {
-        margin: 0;
-        text-align: center;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    # El estilo CSS ya está definido en display_job_offers, no es necesario repetirlo aquí
     
     cols = st.columns(n_samples)
-    for i, (offer, col) in enumerate(zip(st.session_state.job_offers, cols)):
+    for i, (candidate, col) in enumerate(zip(st.session_state.candidates, cols)):
         with col:
-            is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
+            is_selected = st.session_state.get('selected_candidate') == candidate
             card_class = "card"
             
-            # Mostrar el nombre de la oferta directamente en la tarjeta con altura fija
+            # Mostrar el nombre del candidato directamente en la tarjeta
             st.markdown(f"""
             <div class="{card_class}">
-                <div class="card-title">
-                    <h3>{offer['Nombre']}</h3>
-                </div>
+                <h3>{candidate['Nombre']}</h3>
             </div>
             """, unsafe_allow_html=True)
             
-            # Botón de selección espaciado y debajo de los expanders
-            if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar'} Oferta", key=f"offer_{i}"):
+            # Botón de selección
+            if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar'} Candidato", key=f"candidate_{i}"):
                 if is_selected:
-                    st.session_state.selected_offer = None
+                    st.session_state.selected_candidate = None
                 else:
-                    st.session_state.selected_offer = offer
+                    st.session_state.selected_candidate = candidate
                 st.rerun()
             
-            with st.expander("Formación necesaria"):
+            with st.expander("Ver Conocimientos"):
                 st.markdown(f"""
                 <div class="card-content">
-                    <p>{offer['Formación']}</p>
+                    <p>{candidate['Conocimientos']}</p>
                 </div>
                 """, unsafe_allow_html=True)
             
-            with st.expander("Conocimientos requeridos"):
+            with st.expander("Ver Experiencia"):
                 st.markdown(f"""
                 <div class="card-content">
-                    <p>{offer['Conocimientos']}</p>
+                    <p>{candidate['Experiencia']}</p>
                 </div>
                 """, unsafe_allow_html=True)
             
-            with st.expander("Ubicación donde se realiza el trabajo"):
+            with st.expander("Ver Idiomas"):
                 st.markdown(f"""
                 <div class="card-content">
-                    <p>{offer['Localidad']}</p>
+                    <p>{candidate['Idiomas']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with st.expander("Ver Ubicación"):
+                st.markdown(f"""
+                <div class="card-content">
+                    <p>{candidate['Localidad']}, {candidate['Provincia']}</p>
                 </div>
                 """, unsafe_allow_html=True)
