@@ -10,7 +10,6 @@ def display_candidates(data):
         st.warning("No hay candidatos para mostrar.")
         return None
 
-    st.markdown('CANDIDATOS', unsafe_allow_html=True)
     cols = st.columns(n_samples)
 
     for i, (candidate, col) in enumerate(zip(st.session_state.candidates, cols)):
