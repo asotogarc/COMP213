@@ -195,10 +195,7 @@ def main():
             # Mostrar resultados en tarjetas centradas
             st.markdown(f"""
             <div class="comparison-result" style="display: flex; justify-content: center;">
-                <div class="comparison-card offer-card" style="margin: 0 10px;">
-                    <h3>{similarity:.2f}</h3>
-                    <p class="info-trigger">Ver información completa</p>
-                </div>
+                    <h3>HEMOS DETECTADO UN {similarity:.2f}% DE SIMILITUD ENTRE AMBOS TEXTOS</h3>
             </div>
             """, unsafe_allow_html=True)
 
