@@ -213,7 +213,7 @@ def main():
             gpt_opinion_prompt3 = f"""
 
              Eres un científico de datos profesional y tienes que sacar conclusiones del porcentaje de similitud textual obtenido entre el texto
-             de la oferta y el de la candidatura: {similarity}. Recuerda evitar sacar conclusiones relaiconadas con que el candidaot no se ajusta a la oferta, ya que puede haber casos en los que
+             de la oferta y el de la candidatura: {similarity}. Recuerda evitar sacar conclusiones relacionadas con que el candidaot no se ajusta a la oferta, ya que puede haber casos en los que
                 haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos de las ofertas debido a como se ha redactado la candidatura y los terminos usados
 
 
@@ -223,6 +223,16 @@ def main():
             """
             gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
             st.markdown(f'<div class="gpt-output">{gpt_opinion3}</div>', unsafe_allow_html=True)
+
+
+
+            offer_terms = calculate_term_weights(st.session_state.selected_offer)
+            candidate_terms = calculate_term_weights(st.session_state.selected_candidate)
+
+            # Create and display spider chart
+            st.markdown('<h3 class="section-title">Spider Chart: Top 5 Terms Comparison</h3>', unsafe_allow_html=True)
+            spider_chart_option = create_spider_chart(offer_terms, candidate_terms)
+            st_echarts(options=spider_chart_option, height="500px")
 
 
     except Exception as e:
