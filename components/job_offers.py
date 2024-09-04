@@ -23,9 +23,18 @@ def display_job_offers(data):
         flex-direction: column;
         justify-content: space-between;
     }
-    .card h3 {
-        margin-top: 0;
+    .card-title {
+        height: 60px;  /* Altura fija para el título */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .card-title h3 {
+        margin: 0;
         text-align: center;
+        font-size: 14px;  /* Ajusta el tamaño de la fuente según sea necesario */
+        line-height: 1.2;  /* Ajusta el espaciado entre líneas */
     }
     .card-content {
         height: 60px;
@@ -47,10 +56,12 @@ def display_job_offers(data):
             is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
             card_class = "card"
             
-            # Mostrar el nombre de la oferta directamente en la tarjeta
+            # Mostrar el nombre de la oferta directamente en la tarjeta con altura fija
             st.markdown(f"""
             <div class="{card_class}">
-                <h3>{offer['Nombre']}</h3>
+                <div class="card-title">
+                    <h3>{offer['Nombre']}</h3>
+                </div>
             </div>
             """, unsafe_allow_html=True)
             
