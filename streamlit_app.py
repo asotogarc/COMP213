@@ -210,38 +210,7 @@ def main():
             </div>
             """, unsafe_allow_html=True)
 
-            radar_data = [
-                    {"name": term, "oferta": offer_score * 100, "candidato": candidate_score * 100}
-                    for term, (offer_score, candidate_score) in top_terms
-                ]
 
-                options = {
-                    "title": {"text": "Comparación de Términos Clave", "textStyle": {"color": "#2c3e50"}},
-                    "legend": {"data": ["Oferta", "Candidato"], "textStyle": {"color": "#34495e"}},
-                    "radar": {
-                        "indicator": [{"name": item["name"], "max": 100} for item in radar_data],
-                        "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
-                    },
-                    "series": [{
-                        "type": "radar",
-                        "data": [
-                            {
-                                "value": [item["oferta"] for item in radar_data],
-                                "name": "Oferta",
-                                "itemStyle": {"color": "#4CAF50"},
-                                "areaStyle": {"color": "rgba(76,175,80,0.3)"}
-                            },
-                            {
-                                "value": [item["candidato"] for item in radar_data],
-                                "name": "Candidato",
-                                "itemStyle": {"color": "#2196F3"},
-                                "areaStyle": {"color": "rgba(33,150,243,0.3)"}
-                            }
-                        ]
-                    }]
-                }
-
-                st_echarts(options=options, height="500px")
 
             gpt_opinion_prompt3 = f"""
 
