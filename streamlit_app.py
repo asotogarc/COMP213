@@ -166,14 +166,14 @@ def main():
             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
-            st.markdown('<h2 class="section-title">¿ENCAJA EL CANDIDATO CON LA OFERTA?</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">ENCAJE DEL CANDIDATO CON LA OFERTA 💼', unsafe_allow_html=True)
             st.markdown(f'<div class="gpt-output">{gpt_opinion}</div>', unsafe_allow_html=True)
             
             st.markdown("<br><br>", unsafe_allow_html=True)
             st.markdown("<br><br>", unsafe_allow_html=True)
 
-            st.markdown('<h2 class="section-title">DATA SCIENCE EINNOVA</h2>', unsafe_allow_html=True)
-            st.markdown('<h3 class="section-title">¿Qué es el PLN y la similitud textual?</h3>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">DATA SCIENCE EINNOVA 📈</h2>', unsafe_allow_html=True)
+            st.markdown('<h3 class="section-title">Te explicamos que es el PLN y la similitud textual</h3>', unsafe_allow_html=True)
 
             gpt_opinion_prompt2 = f"""
              Eres un científico de datos profesional y tienes que explicar de forma resumida y para todos los públicos qué es el procesamiento de lenguaje natural (PLN)
@@ -189,8 +189,11 @@ def main():
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion2 = get_gpt_explanation(gpt_opinion_prompt2)
-
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
             st.markdown(f'<div class="gpt-output">{gpt_opinion2}</div>', unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
 
             # Mostrar resultados en tarjetas centradas
             st.markdown(f"""
@@ -198,6 +201,9 @@ def main():
                     <h3>HEMOS DETECTADO UN {similarity:.2f}% DE SIMILITUD ENTRE AMBOS TEXTOS</h3>
             </div>
             """, unsafe_allow_html=True)
+
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
 
             gpt_opinion_prompt3 = f"""
              Eres un científico de datos profesional y tienes que sacar conclusiones del porcentaje de similitud textual obtenido entre el texto
@@ -208,6 +214,9 @@ def main():
             """
             gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
             st.markdown(f'<div class="gpt-output">{gpt_opinion3}</div>', unsafe_allow_html=True)
+
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
 
             # Incluir la idea del radar
             radar_data = [
@@ -243,8 +252,10 @@ def main():
 
             st_echarts(options=options, height="500px")
 
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
             # Tabla de comparación detallada
-            st.markdown('<h2 class="section-title">COMPARACIÓN DETALLADA DE TÉRMINOS</h2>', unsafe_allow_html=True)
+            
             comparison_df = pd.DataFrame({
                 "Término": [term for term, _ in top_terms],
                 "Puntuación Oferta": [f"{score*100:.2f}%" for _, (score, _) in top_terms],
@@ -260,8 +271,14 @@ def main():
                     .applymap(color_difference, subset=['Diferencia'])
                     .set_properties(**{'color': 'black'}, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato']))
 
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
+
             # Generar texto elaborado y descargar en PDF
-            st.markdown('<h2 class="section-title">COMPARACIÓN DETALLADA DE TÉRMINOS</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">VISIÓN Y CONCLUSIÓN ESTADÍSTICA</h2>', unsafe_allow_html=True)
+
+            st.markdown("<br><br>", unsafe_allow_html=True)
+            st.markdown("<br><br>", unsafe_allow_html=True)
 
             gpt_opinion_prompt4 = f"""
             Realiza un análisis estadistico y cientifico de datos , completo, profesional y serio sobre los siguientes textos relacionados con una oferta de trabajo
