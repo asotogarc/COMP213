@@ -11,13 +11,9 @@ def display_job_offers(data):
     
     st.markdown('<h2>OFERTAS DE TRABAJO</h2>', unsafe_allow_html=True)
     
-    # Estilo CSS personalizado con animación
+    # Estilo CSS personalizado
     st.markdown("""
     <style>
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
     .card {
         border: 1px solid #ddd;
         padding: 10px;
@@ -41,18 +37,6 @@ def display_job_offers(data):
     .card-content p {
         margin: 0;
         text-align: center;
-        animation: fadeIn 0.5s ease-in;
-    }
-    .stExpander {
-        border: none !important;
-        box-shadow: none !important;
-    }
-    .streamlit-expanderHeader {
-        border-radius: 5px !important;
-        background-color: #f0f2f6 !important;
-    }
-    .streamlit-expanderContent {
-        border: none !important;
     }
     </style>
     """, unsafe_allow_html=True)
