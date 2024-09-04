@@ -40,7 +40,13 @@ def display_job_offers(data):
                 </div>
                 """, unsafe_allow_html=True)
             
-           
+            with st.container():
+                st.markdown(f"""
+                <div class="{card_class}">
+                    <h3>Funciones</h3>
+                    <p>{offer['Funciones']}</p>
+                </div>
+                """, unsafe_allow_html=True)
                 
                 # Botón de selección espaciado y debajo de los expanders
                 if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar'} Oferta", key=f"offer_{i}"):
