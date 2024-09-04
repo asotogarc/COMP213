@@ -12,7 +12,7 @@ from streamlit_echarts import st_echarts
 from utills.data_processing import calculate_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from components.candidates import b
+from components.candidates import a
 
 
 
@@ -192,7 +192,6 @@ def main():
         
         # Mostrar ofertas y candidatos
         display_job_offers(job_offers_data)
-        a(candidates_data)
 
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<br><br>", unsafe_allow_html=True)
