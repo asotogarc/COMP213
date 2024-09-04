@@ -5,7 +5,7 @@ import pandas as pd
 from nltk.corpus import stopwords
 import nltk
 from components.comparison import get_gpt_explanation
-from utills.data_processing import calculate_similarity
+from data_processing import calculate_similarity
 from components.job_offers import display_job_offers
 from components.candidates import display_candidates
 from google_sheets import read_sheet
