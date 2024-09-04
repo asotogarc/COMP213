@@ -44,7 +44,7 @@ def display_job_offers(data):
             card_class = "card" + (" selected" if is_selected else "")
             
             
-            with st.expander("Ver Formación"):
+            with st.expander("Ver Nombre Oferta"):
                     st.markdown(f"""
                     <h3>Funciones</h3>
                     <p><h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2> </p>
