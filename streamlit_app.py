@@ -269,6 +269,8 @@ def main():
             (texto de la oferta = {st.session_state.selected_offer}) (texto de la candidature = {st.session_state.selected_candidate}).
             Utiliza toda la información obtenida (similitud de los textos= [{similarity:.2f}], términos importantes = [{top_terms}]  y demás cosas que consideres útil)
             para crear un análisis detallado y estadístico sobre ambos textos seleccionados.  Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
+            No me des al principio del mensaje esto: ### Análisis Estadístico y Científico de la Oferta de Trabajo y la Candidatura
+
             """
             gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
             st.markdown(f'<div class="gpt-output">{gpt_opinion4}</div>', unsafe_allow_html=True)
