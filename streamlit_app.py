@@ -31,6 +31,13 @@ st.markdown("""
         color: #1E3A8A;
         text-align: center;
     }
+
+    
+    h2 {
+        color: #f7efe2;
+        text-align: center;
+    }
+    
     .stButton>button {
         background-color: #1E3A8A;
         color: white;
