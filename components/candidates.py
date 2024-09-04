@@ -73,7 +73,7 @@ def display_candidates(data):
                     st.rerun()
 
 # Expander para los conocimientos
-            with st.expander("Ver Conocimientos"):
+            with st.expander("Ver Formación"):
                 st.markdown(f"""
                 <div class="expander-content">
                     <h3>Formación</h3>
