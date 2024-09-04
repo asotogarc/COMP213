@@ -104,6 +104,6 @@ def display_candidates(data):
                 st.markdown(f"""
                 <div class="expander-content">
                     <h3>Ubicación</h3>
-                    <p>{candidate['Localidad'],candidate['Provincia']}</p>
+                    <p>{{candidate['Localidad'],candidate['Provincia']}}</p>
                 </div>
                 """, unsafe_allow_html=True)
