@@ -104,7 +104,7 @@ def display_candidates(data):
                 """, unsafe_allow_html=True)
 
                     # Expander para la experiencia
-            with st.expander("Ver Experiencia"):
+            with st.expander("Ver Ubicación"):
                 st.markdown(f"""
                 <div class="expander-content">
                     <h3>Ubicación</h3>
