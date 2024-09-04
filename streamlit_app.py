@@ -11,7 +11,6 @@ from components.candidates import display_candidates
 from google_sheets import read_sheet
 from utills.visualization import display_bar_chart
 from streamlit_echarts import st_echarts
-import go
 
 # Configuración de la página
 st.set_page_config(page_title="NLPMatchJobs", layout="wide")
