@@ -33,7 +33,7 @@ def display_candidates(data):
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        background-color: #28a745;  /* Color de fondo verde */
+        background-color: #007bff;  /* Color de fondo verde */
         border-radius: 5px 5px 0 0;  /* Bordes redondeados solo arriba */
     }
     .card-title h3 {
