@@ -44,9 +44,7 @@ def display_job_offers(data):
                     <h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2>
                     <div class="offer-details">
                         <h3>Experiencia</h3>
-                        <p>{offer['Experiencia']}</p>
-                        <h3>Localidad</h3>
-                        <p>{offer['Localidad']}</p>
+                        <p>{offer['Experiencia']}</p>                      
                         <h3>Provincia</h3>
                         <p>{offer['Provincia']}</p>
                     </div>
@@ -82,4 +80,10 @@ def display_job_offers(data):
                     <p>{offer['Conocimientos']}</p>
                     """, unsafe_allow_html=True)
                 
+                # Expander para los conocimientos
+                with st.expander("Ver Localidad"):
+                    st.markdown(f"""
+                    <h3>Conocimientos</h3>
+                    <p>{offer['Localidad']}</p>
+                    """, unsafe_allow_html=True)
                
