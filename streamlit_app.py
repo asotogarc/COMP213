@@ -50,11 +50,11 @@ def main():
 
     try:
         # Cargar datos de ofertas y candidatos
-        worksheet_jobs = open_google_sheet(sheet_title, "Hoja 1")
-        job_offers_data = read_worksheet(worksheet_jobs)
+        worksheet_jobs = read_sheets(sheet_title, "Hoja 1")
+        job_offers_data = worksheet_jobs
         
-        worksheet_candidates = open_google_sheet(sheet_title, "Hoja 2")
-        candidates_data = read_worksheet(worksheet_candidates)
+        worksheet_candidates = read_sheets(sheet_title, "Hoja 2")
+        candidates_data = worksheet_candidates
         
         # Mostrar ofertas y candidatos
         display_job_offers(job_offers_data)
