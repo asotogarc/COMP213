@@ -18,7 +18,7 @@ st.set_page_config(page_title="NLPMatchJobs", layout="wide")
 st.markdown("""
 <style>
     .reportview-container {
-        background: #f0f2f6
+        background: #556DAC
     }
     .main .block-container {
         padding-top: 2rem;
