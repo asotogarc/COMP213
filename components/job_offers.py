@@ -38,8 +38,8 @@ def display_job_offers(data):
     .card-title h3 {
         margin: 0;
         text-align: center;
-        font-size: 24px;  /* Aumentado el tamaño de la fuente */
-        line-height: 1.5;  /* Aumentado el interlineado */
+        font-size: 18px;  /* Aumentado el tamaño de la fuente */
+        line-height: 1.3;
         font-weight: bold;
         color: #fff;  /* Cambiado el color del texto a blanco */
     }
