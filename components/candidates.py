@@ -40,4 +40,4 @@ def display_candidates(data):
 
             # Expander para la ubicación
             with st.expander("Ver Ubicación"):
-                st.markdown(f"""{candidate['Localidad']}""", unsafe_allow_html=True)
+                st.markdown(f"""{candidate['Localidad']}, {candidate['Provincia']}""", unsafe_allow_html=True)
