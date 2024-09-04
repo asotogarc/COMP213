@@ -49,7 +49,7 @@ def display_job_offers(data):
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: white;
+        background-color: #556dac;
         border-radius: 5px;
         padding: 10px;
         margin-top: 10px;
