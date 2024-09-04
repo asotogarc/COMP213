@@ -138,6 +138,12 @@ def main():
         
         # Mostrar ofertas y candidatos
         display_job_offers(job_offers_data)
+
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
+
+
+        
         display_candidates(candidates_data)
         st.markdown("<br><br>", unsafe_allow_html=True)
 
