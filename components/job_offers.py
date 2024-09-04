@@ -23,7 +23,7 @@ def display_job_offers(data):
         flex-direction: column;
         justify-content: space-between;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        background-color: #f9f9f9;
+        background-color: #556dac;
     }
     .card-title {
         height: 80px;  /* Aumentada la altura para más espacio */
