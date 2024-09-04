@@ -174,7 +174,7 @@ def main():
             st.markdown('<h2 class="section-title">DATA SCIENCE EINNOVA</h2>', unsafe_allow_html=True)
             st.markdown('<h3 class="section-title">SIMILITUD TEXTUAL</h3>', unsafe_allow_html=True)
 
-             gpt_opinion_prompt2 = f"""
+            gpt_opinion_prompt2 = f"""
 
              Eres un científico de datos profesional y tienes que  explicar de forma resumida y para todos los públicos qué es el procesamiento de lenguaje natural (PLN)
              y cómo podemos comparar la similitud de dos textos mediante herramientas de PLN.
