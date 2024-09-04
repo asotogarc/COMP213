@@ -19,13 +19,16 @@ def display_job_offers(data):
         padding: 10px;
         margin: 10px;
         border-radius: 5px;
-        height: 300px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
     .card h3 {
-        margin-top: 80px; /* Añadir margen superior de 20 píxeles */
+        margin-top: 0;
+    }
+    .card-content {
+        height: 100px;
+        overflow-y: auto;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -51,27 +54,23 @@ def display_job_offers(data):
                     st.session_state.selected_offer = offer
                 st.rerun()
             
-            
-            
             with st.expander("Formación necesaria"):
                 st.markdown(f"""
-                <div class="{card_class}">
-                    <h5>{offer['Formación']}</h5>
-                    
+                <div class="card-content">
+                    <p>{offer['Formación']}</p>
                 </div>
                 """, unsafe_allow_html=True)
             
             with st.expander("Conocimientos requeridos"):
                 st.markdown(f"""
-                <div class="{card_class}">
-                    <h2>{offer['Conocimientos']}</h2>
-                    
+                <div class="card-content">
+                    <p>{offer['Conocimientos']}</p>
                 </div>
                 """, unsafe_allow_html=True)
             
             with st.expander("Ubicación donde se realiza el trabajo"):
                 st.markdown(f"""
-                <div class="{card_class}">
-                    <h2>{offer['Localidad']}</h2>
+                <div class="card-content">
+                    <p>{offer['Localidad']}</p>
                 </div>
                 """, unsafe_allow_html=True)
