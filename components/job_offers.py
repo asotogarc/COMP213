@@ -16,53 +16,36 @@ def display_job_offers(data):
     <style>
     .card {
         border: 1px solid #ddd;
-        padding: 15px;
-        margin: 15px;
-        border-radius: 8px;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 5px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        background-color: #556dac;
     }
     .card-title {
-        height: 80px;  /* Aumentada la altura para más espacio */
+        height: 60px;  /* Altura fija para el título */
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        background-color: #556dac;  /* Cambiado el color de fondo */
-        border-radius: 5px;
-        padding: 10px;
     }
     .card-title h3 {
         margin: 0;
         text-align: center;
-        font-size: 18px;  /* Aumentado el tamaño de la fuente */
-        line-height: 1.3;
-        font-weight: bold;
-        color: #fff;  /* Cambiado el color del texto a blanco */
+        font-size: 14px;  /* Ajusta el tamaño de la fuente según sea necesario */
+        line-height: 1.2;  /* Ajusta el espaciado entre líneas */
     }
-
     .card-content {
-        height: 70px;
+        height: 60px;
         overflow-y: auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #556dac;
-        border-radius: 5px;
-        padding: 10px;
-        margin-top: 10px;
     }
     .card-content p {
         margin: 0;
         text-align: center;
-        font-size: 14px;
-    }
-    .stButton > button {
-        width: 100%;
-        margin-top: 10px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -75,8 +58,10 @@ def display_job_offers(data):
             
             # Mostrar el nombre de la oferta directamente en la tarjeta con altura fija
             st.markdown(f"""
+            <div class="{card_class}">
                 <div class="card-title">
                     <h3>{offer['Nombre']}</h3>
+                </div>
             </div>
             """, unsafe_allow_html=True)
             
