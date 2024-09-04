@@ -176,7 +176,6 @@ def main():
                     <h3>SIMILITUD DE AMBOS TEXTOS</h3>
                     <h4>{similarity:.2f}</h4>
                     <p class="info-trigger">Ver información completa</p>
-                        {}%
                 </div>
 
                 </div>
