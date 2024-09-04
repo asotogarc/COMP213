@@ -178,18 +178,11 @@ def main():
                     <h3>OFERTA</h3>
                     <h4>{st.session_state.selected_offer['Nombre']}</h4>
                     <p class="info-trigger">Ver información completa</p>
-                    <div class="full-info">
-                        <p><strong>Formación:</strong> {st.session_state.selected_offer['Formación']}</p>
-                        <p><strong>Conocimientos:</strong> {st.session_state.selected_offer['Conocimientos']}</p>
-                        <p><strong>Experiencia:</strong> {st.session_state.selected_offer['Experiencia']}</p>
-                        <p><strong>Funciones:</strong> {st.session_state.selected_offer['Funciones']}</p>
-                    </div>
-                </div>
-                <div class="comparison-card" style="flex: 0.5; margin: 0 10px;">
-                    <h3>Similitud</h3>
                     <div class="similarity-score" style="color: {'#4CAF50' if similarity > 70 else '#FFA500' if similarity > 50 else '#FF0000'};">
                         {similarity:.2f}%
                     </div>
+                </div>
+
                 </div>
               
             </div>
