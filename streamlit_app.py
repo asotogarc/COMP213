@@ -12,7 +12,7 @@ from streamlit_echarts import st_echarts
 from utills.data_processing import calculate_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from display_candidates import display_candidates
+from b import a
 
 
 
