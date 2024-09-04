@@ -173,10 +173,10 @@ def main():
             st.markdown(f"""
             <div class="comparison-result" style="display: flex; justify-content: center;">
                 <div class="comparison-card offer-card" style="margin: 0 10px;">
-                    <h3>SIMIKITUD DE AMBOS TEXTOS</h3>
-                    <h4>{st.session_state.selected_offer['Nombre']}</h4>
+                    <h3>SIMILITUD DE AMBOS TEXTOS</h3>
+                    <h4>{similarity:.2f}</h4>
                     <p class="info-trigger">Ver información completa</p>
-                        {similarity:.2f}%
+                        {}%
                 </div>
 
                 </div>
