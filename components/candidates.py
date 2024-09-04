@@ -1,4 +1,3 @@
-# Importamos las librerias necesarias
 import streamlit as st
 
 def display_candidates(data):
@@ -13,9 +12,7 @@ def display_candidates(data):
     cols = st.columns(n_samples)
     for i, (candidate, col) in enumerate(zip(st.session_state.candidates, cols)):
         with col:
-            # Menú desplegable con el nombre del candidato
-            selected_name = st.selectbox(f"Seleccionar Candidato {i+1}", [candidate['Nombre']], key=f"selectbox_{i}")
-
+            # Expander para los conocimientos
             # Verificar si el candidato está seleccionado
             is_selected = st.session_state.get('selected_candidate') == candidate
 
@@ -31,24 +28,16 @@ def display_candidates(data):
 
             # Expander para los conocimientos
             with st.expander("Ver Conocimientos"):
-                st.markdown(f"""
-                    {candidate['Conocimientos']}
-                """, unsafe_allow_html=True)
+                st.markdown(f"""{candidate['Conocimientos']}""", unsafe_allow_html=True)
 
             # Expander para la experiencia
             with st.expander("Ver Experiencia"):
-                st.markdown(f"""
-                    {candidate['Experiencia']}
-                """, unsafe_allow_html=True)
+                st.markdown(f"""{candidate['Experiencia']}""", unsafe_allow_html=True)
 
             # Expander para los idiomas
             with st.expander("Ver Idiomas"):
-                st.markdown(f"""
-                    {candidate['Idiomas']}
-                """, unsafe_allow_html=True)
+                st.markdown(f"""{candidate['Idiomas']}""", unsafe_allow_html=True)
 
             # Expander para la ubicación
             with st.expander("Ver Ubicación"):
-                st.markdown(f"""
-                    {candidate['Localidad']}, {candidate['Provincia']}
-                """, unsafe_allow_html=True)
+                st.markdown(f"""{candidate['Localidad']}""", unsafe_allow_html=True)
