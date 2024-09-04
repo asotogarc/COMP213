@@ -167,10 +167,9 @@ def main():
             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
-            st.markdown('<h2 class="section-title">COMPARACIÓN PERSONALIZADA</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="section-title">¿ENCAJA EL CANDIDATO CON LA OFERTA?</h2>', unsafe_allow_html=True)
             st.markdown(f'<div class="gpt-output">{gpt_opinion}</div>', unsafe_allow_html=True)
-
-            st.markdown('<h2 class="section-title">RESULTADO DE LA COMPARACIÓN</h2>', unsafe_allow_html=True)
+            
             
             # Mostrar resultados en tarjetas centradas
             st.markdown(f"""
