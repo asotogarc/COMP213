@@ -49,7 +49,7 @@ def display_job_offers(data):
                 st.markdown(f"""
                 <div class="{card_class}">
                     <h3>Formación</h3>
-                    <p>{offer['Formación']}</p>
+                    <h2>{offer['Formación']}</h2>
                 </div>
                 """, unsafe_allow_html=True)
             
