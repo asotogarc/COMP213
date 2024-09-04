@@ -5,118 +5,30 @@ import pandas as pd
 from nltk.corpus import stopwords
 import nltk
 from components.comparison import get_gpt_explanation
+from utills.data_processing import calculate_similarity
 from components.job_offers import display_job_offers
-from components.candidates import display_candidates
-
-from google_sheets import read_sheet
+from utills.google_sheets import read_worksheet 
+from utills.google_sheets import open_google_sheet
 from utills.visualization import display_bar_chart
 from streamlit_echarts import st_echarts
-from utills.data_processing import calculate_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-
-
-
-
 
 # Configuración de la página
 st.set_page_config(page_title="NLPMatchJobs", layout="wide")
-
-st.markdown("""
-<style>
-    .reportview-container {
-        background: #556DAC
-    }
-    .main .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        background: #556DAC;
-    }
-    h1, h2, h3 {
-        color: #1E3A8A;
-        text-align: center;
-    }
-    .stButton>button {
-        background-color: #1E3A8A;
-        color: white;
-        display: block;
-        margin: 0 auto;
-    }
-    .stButton>button:hover {
-        background-color: #2563EB;
-    }
-    .centered {
-        display: flex;
-        justify-content: center;
-    }
-    .metrics-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .metric-item {
-        margin: 10px;
-        text-align: center;
-    }
-    .section-divider {
-        border-top: 2px solid #1E3A8A;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
-    .stMetric {
-        text-align: center;
-    }
-    .stats-table {
-        margin: 0 auto;
-        width: 50%;
-    }
-    .stats-table th, .stats-table td {
-        text-align: center;
-        padding: 10px;
-        border: 1px solid #1E3A8A;
-    }
-    .stats-table th {
-        background-color: #f79b77;
-        color: white;
-    }
-       .reportview-container {
-            margin-top: -2em;
-        }
-        #MainMenu {visibility: hidden;}
-        .stDeployButton {display:none;}
-        footer {visibility: hidden;}
-        #stDecoration {display:none;}
-        header {visibility: hidden;}
-        [data-testid="stToolbar"] {visibility: hidden !important;}
-
-      .comparison-result {
-        background-color: #f0f4f8;  /* Light blue-gray background */
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .comparison-card {
-        background-color: white;
-        border: 2px solid #4a5568;  /* Dark blue-gray border */
-        border-radius: 8px;
-        padding: 15px;
-        margin: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    .offer-card, .candidate-card {
-        border-color: #2b6cb0;  /* Darker blue border for offer and candidate cards */
-    }
-    .similarity-score {
-        font-size: 24px;
-        font-weight: bold;
-        text-align: center;
-</style>
-""", unsafe_allow_html=True)
-
 # Apply custom theme
-
-
+st.markdown("""
+    <style>
+    :root {
+        --primary-color: #4CAF50;
+        --background-color: #f0f2f6;
+        --secondary-background-color: #e0e0e0;
+        --text-color: #262730;
+        --font: sans-serif;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+# Enlazamos el archivo custom.css
+with open("styles/custom.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # Descargar stopwords en español
 nltk.download('stopwords')
@@ -125,55 +37,8 @@ stop_words = set(stopwords.words('spanish'))
 # Definimos nuestra API Key de chat GPT
 client = OpenAI(api_key=config.API_KEY)
 
-
-
-def calculate_term_weights(text, top_n=5):
-    vectorizer = TfidfVectorizer(stop_words=list(stop_words))
-    tfidf_matrix = vectorizer.fit_transform([text])
-    feature_names = vectorizer.get_feature_names_out()
-    weights = tfidf_matrix.toarray()[0]
-    term_weights = sorted(zip(feature_names, weights), key=lambda x: x[1], reverse=True)[:top_n]
-    return dict(term_weights)
-
-def create_spider_chart(offer_terms, candidate_terms):
-    terms = list(set(offer_terms.keys()) | set(candidate_terms.keys()))
-    offer_values = [offer_terms.get(term, 0) for term in terms]
-    candidate_values = [candidate_terms.get(term, 0) for term in terms]
-    
-    option = {
-        "title": {"text": "Top 5 Terms Comparison"},
-        "radar": {
-            "indicator": [{"name": term, "max": 1} for term in terms]
-        },
-        "series": [{
-            "type": "radar",
-            "data": [
-                {
-                    "value": offer_values,
-                    "name": "Job Offer"
-                },
-                {
-                    "value": candidate_values,
-                    "name": "Candidate"
-                }
-            ]
-        }]
-    }
-    return option
-
-def create_comparative_table(offer_terms, candidate_terms):
-    df = pd.DataFrame({
-        "Term": offer_terms.keys(),
-        "Offer Weight": offer_terms.values(),
-        "Candidate Weight": [candidate_terms.get(term, 0) for term in offer_terms.keys()],
-    })
-    df["Difference"] = df["Offer Weight"] - df["Candidate Weight"]
-    df = df.sort_values("Difference", ascending=False)
-    return df
-
-
-
 def main():
+    st.title("EINNOVA AI -- COMPARADOR DE CANDIDATURAS Y OFERTAS DE TRABAJO")
 
     # Inicializar variables de sesión
     if 'selected_offer' not in st.session_state:
@@ -185,112 +50,202 @@ def main():
 
     try:
         # Cargar datos de ofertas y candidatos
-        worksheet_jobs = read_sheet(credentials= config.credentials,range_val='Hoja 1')
-        job_offers_data = worksheet_jobs
+        worksheet_jobs = open_google_sheet(sheet_title, "Hoja 1")
+        job_offers_data = read_worksheet(worksheet_jobs)
         
-        worksheet_candidates = read_sheet(credentials=config.credentials,range_val='Hoja 2')
-        candidates_data = worksheet_candidates
+        worksheet_candidates = open_google_sheet(sheet_title, "Hoja 2")
+        candidates_data = read_worksheet(worksheet_candidates)
         
         # Mostrar ofertas y candidatos
         display_job_offers(job_offers_data)
-        display_candidates(job_offers_data)        
-
-        st.markdown("<br><br>", unsafe_allow_html=True)
+        display_candidates(candidates_data)
         st.markdown("<br><br>", unsafe_allow_html=True)
 
+        # Botón de comparación centrado y más grande
+        st.markdown("""
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+          
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Botón oculto de Streamlit para manejar la lógica
+        if st.button("Realizar Comparación", key="compare_button"):
+            if st.session_state.selected_offer and st.session_state.selected_candidate:
+                similarity, top_terms = calculate_similarity(st.session_state.selected_offer, st.session_state.selected_candidate)
+
+                                # Opinión personalizada del GPT
+                gpt_opinion_prompt = f"""
+                Analiza el texto de la oferta:
+                {st.session_state.selected_offer}
+                
+                Y el texto de la candidatura:
+                {st.session_state.selected_candidate}
+                
+                Basándonos en la información de la oferta {st.session_state.selected_offer} y en el de la candidatura {st.session_state.selected_candidate}, opinamos si la oferta se ajusta al perfil del candidato.
+                Si la la oferta  se ajusta al perfil de la candidatura enseña un numero y un correo para poder ponerse en contacto con el candidato.
+                No me tienes que dar un resumen del contenido de la oferta y la cnadidatura si no una conclusion desarrollado argumentando muy bien si la candidatura se ajusta bien a la oferta
+                Después de nuestra opinión, mencionamos que mostraremos los resultados del análisis del procesamiento del lenguaje natural de ambos textos.
+                Debes explicar sencillamente y brevemente que puede haber candidatos que se ajustan bien a un perfil pero que la comparación del texto de su candidatura con el de la oferta puede presentar un  bajo porcentaje de similitud
+                Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
+                
+                """
+                gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
+                st.markdown('<h2 class="section-title">Recomendación Personalizada</h2>', unsafe_allow_html=True)
+                st.markdown(f'<div class="gpt-output">{gpt_opinion}</div>', unsafe_allow_html=True)
 
         
-        st.markdown("<br><br>", unsafe_allow_html=True)
-
-        # Ejecutar comparación automáticamente al seleccionar oferta y candidatura
-        if st.session_state.selected_offer and st.session_state.selected_candidate:
-            similarity, top_terms = calculate_similarity(st.session_state.selected_offer, st.session_state.selected_candidate)
-
-            # Opinión personalizada del GPT
-            gpt_opinion_prompt = f"""
-            Analiza el texto de la oferta:
-            {st.session_state.selected_offer}
-            
-            Y el texto de la candidatura:
-            {st.session_state.selected_candidate}
-            
-            Basándonos en la información de la oferta {st.session_state.selected_offer} y en el de la candidatura {st.session_state.selected_candidate}, opinamos si la oferta se ajusta al perfil del candidato.
-            Si la la oferta  se ajusta al perfil de la candidatura enseña un numero y un correo para poder ponerse en contacto con el candidato, no con la empresa que oferta el trabajo.
-            No me tienes que dar un resumen del contenido de la oferta y la cnadidatura si no una conclusion desarrollado argumentando muy bien si la candidatura se ajusta bien a la oferta
-            Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
-            """
-            gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
-            st.markdown('<h2 class="section-title">¿ENCAJA EL CANDIDATO CON LA OFERTA?</h2>', unsafe_allow_html=True)
-            st.markdown(f'<div class="gpt-output">{gpt_opinion}</div>', unsafe_allow_html=True)
-            
-            st.markdown("<br><br>", unsafe_allow_html=True)
-            st.markdown("<br><br>", unsafe_allow_html=True)
-
-            st.markdown('<h2 class="section-title">DATA SCIENCE EINNOVA</h2>', unsafe_allow_html=True)
-            st.markdown('<h3 class="section-title">¿Qué es el PLN y la similitud textual?</h3>', unsafe_allow_html=True)
-
-            gpt_opinion_prompt2 = f"""
-
-             Eres un científico de datos profesional y tienes que  explicar de forma resumida y para todos los públicos qué es el procesamiento de lenguaje natural (PLN)
-             y cómo podemos comparar la similitud de dos textos mediante herramientas de PLN.
-
-             Además tienes que decir que se va a mostrar la similitud textual entre la oferta y candidatura seleccionada. Debes mencionar brvemente que
-             para comparar la similitud de los dos textos, utilizamos técnicas de PLN como la tokenización, la vectorización y el cálculo de la distancia entre vectores.
-             las cuales son técnicas que nos permiten cuantificar la similitud entre los textos de manera precisa y objetiva.
-
-             Debes explicar que puede haber casos en los que haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos
-             de las ofertas debido a como se ha redactado la candidatura y los terminos usados
-
-
-
-            
-             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
-            """
-            gpt_opinion2 = get_gpt_explanation(gpt_opinion_prompt2)
-
-            st.markdown(f'<div class="gpt-output">{gpt_opinion2}</div>', unsafe_allow_html=True)
-
-            
-            # Mostrar resultados en tarjetas centradas
-            st.markdown(f"""
-            <div class="comparison-result" style="display: flex; justify-content: center;">
-                <div class="comparison-card offer-card" style="margin: 0 10px;">
-                    
-                    <h3>{similarity}</h3>
-                    <p class="info-trigger">Ver información completa</p>
+                st.markdown('<h2 class="section-title">RESULTADO DE LA COMPARACIÓN</h2>', unsafe_allow_html=True)
+                
+                # Mostrar resultados en tarjetas
+                st.markdown(f"""
+                <div class="comparison-result">
+                    <div class="comparison-card offer-card">
+                        <h3>OFERTA</h3>
+                        <h4>{st.session_state.selected_offer['Nombre']}</h4>
+                        <p class="info-trigger">Ver información completa</p>
+                        <div class="full-info">
+                            <p><strong>Formación:</strong> {st.session_state.selected_offer['Formación']}</p>
+                            <p><strong>Conocimientos:</strong> {st.session_state.selected_offer['Conocimientos']}</p>
+                            <p><strong>Experiencia:</strong> {st.session_state.selected_offer['Experiencia']}</p>
+                            <p><strong>Funciones:</strong> {st.session_state.selected_offer['Funciones']}</p>
+                        </div>
+                    </div>
+                    <div class="comparison-card" style="flex: 0.5;">
+                        <h3>Similitud</h3>
+                        <div class="similarity-score" style="color: {'#4CAF50' if similarity > 70 else '#FFA500' if similarity > 50 else '#FF0000'};">
+                            {similarity:.2f}%
+                        </div>
+                    </div>
+                    <div class="comparison-card candidate-card">
+                        <h3>CANDIDATURA</h3>
+                        <h4>{st.session_state.selected_candidate['Nombre']}</h4>
+                        <p class="info-trigger">Ver candidatura completa</p>
+                        <div class="full-info">
+                            <p><strong>Formación:</strong> {st.session_state.selected_candidate['Formación']}</p>
+                            <p><strong>Conocimientos:</strong> {st.session_state.selected_candidate['Conocimientos']}</p>
+                            <p><strong>Experiencia:</strong> {st.session_state.selected_candidate['Experiencia']}</p>
+                            <p><strong>Idiomas:</strong> {st.session_state.selected_candidate['Idiomas']}</p>
+                        </div>
+                    </div>
                 </div>
+                """, unsafe_allow_html=True)
 
-              
-            </div>
-            """, unsafe_allow_html=True)
+                # Explicación detallada del porcentaje de similitud
+                similarity_explanation_prompt = f"""
+                Explica de forma detallada pero comprensible para cualquier persona el porcentaje de similitud del {similarity:.2f}% 
+                obtenido entre la candidatura y la oferta. La explicación debe ser profesional y técnica, pero a la vez fácil de entender.
+                Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
+                """
+                similarity_explanation = get_gpt_explanation(similarity_explanation_prompt)
 
-            gpt_opinion_prompt3 = f"""
+                # Análisis detallado
+                st.subheader("Análisis Detallado")
 
-             Eres un científico de datos profesional y tienes que sacar conclusiones del porcentaje de similitud textual obtenido entre el texto
-             de la oferta y el de la candidatura: {similarity}. Recuerda evitar sacar conclusiones relacionadas con que el candidaot no se ajusta a la oferta, ya que puede haber casos en los que
-                haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos de las ofertas debido a como se ha redactado la candidatura y los terminos usados
+                # Gráfico de radar
+                radar_data = [
+                    {"name": term, "oferta": offer_score * 100, "candidato": candidate_score * 100}
+                    for term, (offer_score, candidate_score) in top_terms
+                ]
+
+                options = {
+                    "title": {"text": "Comparación de Términos Clave", "textStyle": {"color": "#2c3e50"}},
+                    "legend": {"data": ["Oferta", "Candidato"], "textStyle": {"color": "#34495e"}},
+                    "radar": {
+                        "indicator": [{"name": item["name"], "max": 100} for item in radar_data],
+                        "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
+                    },
+                    "series": [{
+                        "type": "radar",
+                        "data": [
+                            {
+                                "value": [item["oferta"] for item in radar_data],
+                                "name": "Oferta",
+                                "itemStyle": {"color": "#4CAF50"},
+                                "areaStyle": {"color": "rgba(76,175,80,0.3)"}
+                            },
+                            {
+                                "value": [item["candidato"] for item in radar_data],
+                                "name": "Candidato",
+                                "itemStyle": {"color": "#2196F3"},
+                                "areaStyle": {"color": "rgba(33,150,243,0.3)"}
+                            }
+                        ]
+                    }]
+                }
+
+                st_echarts(options=options, height="500px")
+
+                # Gráfico de barras comparativo
+                offer_scores = [item["oferta"] for item in radar_data]
+                candidate_scores = [item["candidato"] for item in radar_data]
+                terms = [item["name"] for item in radar_data]
+                display_bar_chart(offer_scores, candidate_scores, terms)
+
+                # Tabla de comparación detallada
+                st.markdown('<h2 class="section-title">COMPARACIÓN DETALLADA DE TÉRMINOS</h2>', unsafe_allow_html=True)
+                comparison_df = pd.DataFrame({
+                    "Término": [term for term, _ in top_terms],
+                    "Puntuación Oferta": [f"{score*100:.2f}%" for _, (score, _) in top_terms],
+                    "Puntuación Candidato": [f"{score*100:.2f}%" for _, (_, score) in top_terms],
+                    "Diferencia": [(offer_score - candidate_score)*100 for _, (offer_score, candidate_score) in top_terms]
+                })                    
+                def color_difference(val):
+                    color = 'green' if val > 0 else 'red' if val < 0 else 'white'
+                    return f'background-color: {color}'
+
+                st.table(comparison_df.style
+                        .format({'Diferencia': '{:.2f}%'})
+                        .applymap(color_difference, subset=['Diferencia'])
+                        .set_properties(**{'color': 'black'}, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato']))
+
+                # Explicación de la comparación de términos clave
+                terms_comparison_prompt = f"""
+                Analiza y explica de forma detallada pero comprensible las conclusiones de la comparación de términos clave 
+                entre la oferta y el candidato. Utiliza la siguiente información:
+                {comparison_df.to_string()}
+                La explicación debe ser profesional y técnica, pero a la vez fácil de entender para cualquier persona.
+                Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
+                """
+                terms_comparison_explanation = get_gpt_explanation(terms_comparison_prompt)
+                st.markdown('<h2 class="section-title">ANÁLISIS DE COMPARACIÓN DE TÉRMINOS CLAVE</h2>', unsafe_allow_html=True)
+                st.markdown(f'<div class="gpt-output">{terms_comparison_explanation}</div>', unsafe_allow_html=True)
+
+
+                # Áreas de mejora
+                st.markdown('<h2 class="section-title">Áreas de Mejora para el Candidato</h2>', unsafe_allow_html=True)
+                st.markdown('<div class="section-content">', unsafe_allow_html=True)
+                improvements = [term for term, (offer_score, candidate_score) in top_terms if offer_score > candidate_score]
+                if improvements:
+                    improvement_prompt = f"""
+                    Basándonos en las siguientes áreas de mejora para el candidato: {', '.join(improvements[:5])},
+                    proporcionamos recomendaciones específicas y fáciles de entender para mejorar en estas áreas.
+                    Incluimos sugerencias de cursos, videos, libros u otros recursos que puedan ayudar al candidato a mejorar.
+                    La explicación debe ser motivadora y orientada al desarrollo profesional.
+                    Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
+                    """
+                    improvement_explanation = get_gpt_explanation(improvement_prompt)
+                    st.markdown(f'<div class="gpt-output">{improvement_explanation}</div>', unsafe_allow_html=True)
+                else:
+                    st.markdown("""
+                    <div style="background-color: #e8f5e9; padding: 10px; border-radius: 5px;">
+                        <p style="color: black;">El candidato cumple o excede todas las áreas requeridas por la oferta. ¡Excelente trabajo!</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                # Recomendación de leer el análisis
 
 
 
-            
-             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
-            """
-            gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
-            st.markdown(f'<div class="gpt-output">{gpt_opinion3}</div>', unsafe_allow_html=True)
-
-
-
-            offer_terms = calculate_term_weights(st.session_state.selected_offer)
-            candidate_terms = calculate_term_weights(st.session_state.selected_candidate)
-
-            # Create and display spider chart
-            st.markdown('<h3 class="section-title">Spider Chart: Top 5 Terms Comparison</h3>', unsafe_allow_html=True)
-            spider_chart_option = create_spider_chart(offer_terms, candidate_terms)
-            st_echarts(options=spider_chart_option, height="500px")
-
+ 
+            else:
+                st.markdown("""
+                <div style="background-color: #fff3e0; padding: 10px; border-radius: 5px;">
+                    <p style="color: black;">Por favor, seleccione tanto una oferta como un candidato antes de comparar.</p>
+                </div>
+                """, unsafe_allow_html=True)
 
     except Exception as e:
-        st.error(f"Error al cargar los datos: {e}")
+        st.error(f"Se produjo un error: {str(e)}")
 
 if __name__ == "__main__":
     main()
