@@ -27,9 +27,22 @@ def display_candidates(data):
         flex-direction: column;
         justify-content: space-between;
     }
-    .card h3 {
-        margin-top: 0;
+    .card-title {
+        height: 80px;  /* Altura aumentada para el título */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: #28a745;  /* Color de fondo verde */
+        border-radius: 5px 5px 0 0;  /* Bordes redondeados solo arriba */
+    }
+    .card-title h3 {
+        margin: 0;
         text-align: center;
+        font-size: 18px;  /* Tamaño de fuente aumentado */
+        line-height: 1.3;
+        color: white;  /* Texto en blanco */
+        padding: 10px;
     }
     .card-content {
         height: 60px;
@@ -66,7 +79,9 @@ def display_candidates(data):
             # Mostrar el nombre del candidato directamente en la tarjeta
             st.markdown(f"""
             <div class="{card_class}">
-                <h3>{candidate['Nombre']}</h3>
+                <div class="card-title">
+                    <h3>{candidate['Nombre']}</h3>
+                </div>
             </div>
             """, unsafe_allow_html=True)
             
