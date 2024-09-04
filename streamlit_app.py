@@ -267,22 +267,14 @@ def main():
                     .set_properties(**{'color': 'black'}, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato']))
 
             # Generar texto elaborado y descargar en PDF
+            st.markdown('<h2 class="section-title">COMPARACIÓN DETALLADA DE TÉRMINOS</h2>', unsafe_allow_html=True)
+
             gpt_opinion_prompt4 = f"""
             Eres un científico de datos profesional y tienes que generar un texto elaborado sobre los textos seleccionados. Utiliza toda la información obtenida (similitud de los textos, términos importantes y demás cosas que consideres útil) para crear un análisis detallado y estadístico sobre ambos textos seleccionados.
             """
             gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
 
-            def create_pdf(text):
-                pdf = FPDF()
-                pdf.add_page()
-                pdf.set_font("Arial", size=12)
-                pdf.multi_cell(0, 10, text)
-                return pdf
-
-            if st.button("Generar PDF"):
-                pdf = create_pdf(gpt_opinion4)
-                pdf_output = pdf.output(dest='S').encode('latin1')
-                st.download_button(label="Descargar PDF", data=pdf_output, file_name="analisis_textos.pdf")
+ 
 
     except Exception as e:
         st.error(f"Error al cargar los datos: {e}")
