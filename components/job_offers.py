@@ -19,13 +19,13 @@ def display_job_offers(data):
         padding: 10px;
         margin: 10px;
         border-radius: 5px;
-        height: 300px; /* Altura fija de los contenedores */
+        height: 300px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
     .card h3 {
-        margin-top: 0; /* Eliminar margen superior del título */
+        margin-top: 20px; /* Añadir margen superior de 20 píxeles */
     }
     </style>
     """, unsafe_allow_html=True)
