@@ -53,7 +53,7 @@ def display_job_offers(data):
             
             
             
-            with st.expander("Ver Formación"):
+            with st.expander("Formación necesaria"):
                 st.markdown(f"""
                 <div class="{card_class}">
                     <h3>Funciones</h3>
