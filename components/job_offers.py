@@ -43,8 +43,6 @@ def display_job_offers(data):
                 <div class="{card_class}">
                     <h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2>
                     <div class="offer-details">
-                        <h3>Formación</h3>
-                        <p>{offer['Formación']}</p>
                         <h3>Experiencia</h3>
                         <p>{offer['Experiencia']}</p>
                         <h3>Localidad</h3>
@@ -64,6 +62,13 @@ def display_job_offers(data):
                     st.rerun()
                 st.markdown('</div>', unsafe_allow_html=True)
                 # Usar un expander de Streamlit para las funciones
+
+                with st.expander("Ver Formación"):
+                    st.markdown(f"""
+                    <h3>Funciones</h3>
+                    <p>{offer['Formación']}</p>
+                    """, unsafe_allow_html=True)
+                
                 with st.expander("Ver Funciones"):
                     st.markdown(f"""
                     <h3>Funciones</h3>
