@@ -62,6 +62,14 @@ def display_job_offers(data):
                     </div>
                     """, unsafe_allow_html=True)
                 
+                with st.expander("Ver Funciones", expanded=False):
+                    st.markdown(f"""
+                    <div class="{card_class}">
+                        <h3>Funciones</h3>
+                        <p>{offer['Funciones']}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
                 # Expander para los conocimientos
                 with st.expander("Ver Conocimientos"):
                     st.markdown(f"""
