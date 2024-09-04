@@ -172,7 +172,7 @@ def main():
             st.markdown("<br><br>", unsafe_allow_html=True)
 
             st.markdown('<h2 class="section-title">DATA SCIENCE EINNOVA</h2>', unsafe_allow_html=True)
-            st.markdown('<h3 class="section-title">SIMILITUD TEXTUAL</h3>', unsafe_allow_html=True)
+            st.markdown('<h3 class="section-title">¿Qué es el PLN y la similitud textual?</h3>', unsafe_allow_html=True)
 
             gpt_opinion_prompt2 = f"""
 
@@ -212,7 +212,8 @@ def main():
             gpt_opinion_prompt3 = f"""
 
              Eres un científico de datos profesional y tienes que sacar conclusiones del porcentaje de similitud textual obtenido entre el texto
-             de la oferta y el de la candidatura: {similarity}
+             de la oferta y el de la candidatura: {similarity}. Recuerda evitar sacar conclusiones relaiconadas con que el candidaot no se ajusta a la oferta, ya que puede haber casos en los que
+                haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos de las ofertas debido a como se ha redactado la candidatura y los terminos usados
 
 
 
