@@ -24,17 +24,21 @@ def display_job_offers(data):
         justify-content: space-between;
     }
     .card-title {
-        height: 60px;  /* Altura fija para el título */
+        height: 80px;  /* Aumentada la altura del título */
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        background-color: #007bff;  /* Color de fondo azul */
+        border-radius: 5px 5px 0 0;  /* Bordes redondeados solo arriba */
     }
     .card-title h3 {
         margin: 0;
         text-align: center;
-        font-size: 14px;  /* Ajusta el tamaño de la fuente según sea necesario */
-        line-height: 1.2;  /* Ajusta el espaciado entre líneas */
+        font-size: 18px;  /* Aumentado el tamaño de la fuente */
+        line-height: 1.3;  /* Ajustado el espaciado entre líneas */
+        color: white;  /* Cambiado el color del texto a blanco */
+        padding: 10px;  /* Añadido padding para mejor apariencia */
     }
     .card-content {
         height: 60px;
