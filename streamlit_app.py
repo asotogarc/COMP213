@@ -51,7 +51,6 @@ stop_words = set(stopwords.words('spanish'))
 client = OpenAI(api_key=config.API_KEY)
 
 def main():
-    st.title("EINNOVA 💼 | COMPARADOR DE CANDIDATURAS Y OFERTAS DE TRABAJO")
 
     # Inicializar variables de sesión
     if 'selected_offer' not in st.session_state:
