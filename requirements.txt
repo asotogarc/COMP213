@@ -12,4 +12,3 @@ matplotlib
 seaborn
 scipy
 openai
-go
