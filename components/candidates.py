@@ -58,3 +58,11 @@ def display_candidates(data):
                 
                 {candidate['Idiomas']}
                 """, unsafe_allow_html=True)
+
+                        # Expander para la experiencia
+            with st.expander("Ver Ubicación"):
+                st.markdown(f"""
+                
+                
+                {candidate['Localidad'], candidate['Provincia']}
+                """, unsafe_allow_html=True)
