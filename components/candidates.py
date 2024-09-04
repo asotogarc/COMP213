@@ -81,6 +81,16 @@ def display_candidates(data):
                 </div>
                 """, unsafe_allow_html=True)
 
+
+            with st.expander("Ver Idiomas"):
+                                st.markdown(f"""
+                                <div class="expander-content">
+                                    <h3>Formación</h3>
+                                    <p>{candidate['Idiomas']}</p>
+                                </div>
+                                """, unsafe_allow_html=True)
+
+
             # Expander para los conocimientos
             with st.expander("Ver Conocimientos"):
                 st.markdown(f"""
@@ -104,6 +114,6 @@ def display_candidates(data):
                 st.markdown(f"""
                 <div class="expander-content">
                     <h3>Ubicación</h3>
-                    <p>{{candidate['Localidad'],candidate['Provincia']}}</p>
+                    <p>{candidate['Localidad'],candidate['Provincia']}</p>
                 </div>
                 """, unsafe_allow_html=True)
