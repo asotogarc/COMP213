@@ -119,6 +119,50 @@ stop_words = set(stopwords.words('spanish'))
 # Definimos nuestra API Key de chat GPT
 client = OpenAI(api_key=config.API_KEY)
 
+def calculate_term_weights(text, top_n=5):
+    vectorizer = TfidfVectorizer(stop_words=list(stop_words))
+    tfidf_matrix = vectorizer.fit_transform([text])
+    feature_names = vectorizer.get_feature_names_out()
+    weights = tfidf_matrix.toarray()[0]
+    term_weights = sorted(zip(feature_names, weights), key=lambda x: x[1], reverse=True)[:top_n]
+    return dict(term_weights)
+
+def create_spider_chart(offer_terms, candidate_terms):
+    terms = list(set(offer_terms.keys()) | set(candidate_terms.keys()))
+    offer_values = [offer_terms.get(term, 0) for term in terms]
+    candidate_values = [candidate_terms.get(term, 0) for term in terms]
+    
+    option = {
+        "title": {"text": "Top 5 Terms Comparison"},
+        "radar": {
+            "indicator": [{"name": term, "max": 1} for term in terms]
+        },
+        "series": [{
+            "type": "radar",
+            "data": [
+                {
+                    "value": offer_values,
+                    "name": "Job Offer"
+                },
+                {
+                    "value": candidate_values,
+                    "name": "Candidate"
+                }
+            ]
+        }]
+    }
+    return option
+
+def create_comparative_table(offer_terms, candidate_terms):
+    df = pd.DataFrame({
+        "Term": offer_terms.keys(),
+        "Offer Weight": offer_terms.values(),
+        "Candidate Weight": [candidate_terms.get(term, 0) for term in offer_terms.keys()],
+    })
+    df["Difference"] = df["Offer Weight"] - df["Candidate Weight"]
+    df = df.sort_values("Difference", ascending=False)
+    return df
+
 def main():
 
     # Inicializar variables de sesión
