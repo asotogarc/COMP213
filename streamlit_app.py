@@ -365,7 +365,7 @@ def main():
             <div class="comparison-result" style="display: flex; justify-content: center;">
                 <div class="comparison-card offer-card" style="margin: 0 10px;">
                     
-                    <h3>{similarity:.2f}</h3>
+                    <h3>{similarity}</h3>
                     <p class="info-trigger">Ver información completa</p>
                 </div>
 
