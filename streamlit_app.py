@@ -204,7 +204,7 @@ def main():
 
             gpt_opinion_prompt3 = f"""
              Eres un científico de datos profesional y tienes que sacar conclusiones del porcentaje de similitud textual obtenido entre el texto
-             de la oferta y el de la candidatura: {similarity}. Recuerda evitar sacar conclusiones relacionadas con que el candidato no se ajusta a la oferta, ya que puede haber casos en los que
+             de la oferta y el de la candidatura: {similarity:.2f}. Recuerda evitar sacar conclusiones relacionadas con que el candidato no se ajusta a la oferta, ya que puede haber casos en los que
              haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos de las ofertas debido a cómo se ha redactado la candidatura y los términos usados.
 
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
@@ -267,7 +267,10 @@ def main():
             st.markdown('<h2 class="section-title">COMPARACIÓN DETALLADA DE TÉRMINOS</h2>', unsafe_allow_html=True)
 
             gpt_opinion_prompt4 = f"""
-            Eres un científico de datos profesional y tienes que generar un texto elaborado sobre los textos seleccionados. Utiliza toda la información obtenida (similitud de los textos, términos importantes y demás cosas que consideres útil) para crear un análisis detallado y estadístico sobre ambos textos seleccionados.
+            Eres un científico de datos profesional y tienes que generar un texto elaborado sobre los textos seleccionados 
+            (texto de la oferta = {st.session_state.selected_offer}) (texto de la candidature = {st.session_state.selected_candidate}).
+            Utiliza toda la información obtenida (similitud de los textos= [{similarity:.2f}], términos importantes = [{top_terms}]  y demás cosas que consideres útil)
+            para crear un análisis detallado y estadístico sobre ambos textos seleccionados.
             """
             gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
             st.markdown(f'<div class="gpt-output">{gpt_opinion2}</div>', unsafe_allow_html=True)
