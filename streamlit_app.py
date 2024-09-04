@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 import nltk
 from components.comparison import get_gpt_explanation
 from components.job_offers import display_job_offers
-from components.candidates import display_job_offers2
+from components.candidates import display_candidates
 
 from google_sheets import read_sheet
 from utills.visualization import display_bar_chart
@@ -193,7 +193,7 @@ def main():
         
         # Mostrar ofertas y candidatos
         display_job_offers(job_offers_data)
-        display_job_offers2(job_offers_data)        
+        display_candidates(job_offers_data)        
 
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<br><br>", unsafe_allow_html=True)
