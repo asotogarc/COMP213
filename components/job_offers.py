@@ -94,6 +94,6 @@ def display_job_offers(data):
             with st.expander("Ubicación donde se realiza el trabajo"):
                 st.markdown(f"""
                 <div class="card-content">
-                    <p>{offer['Localidad']}</p>
+                    <p>{offer['Localidad']}, {offer['Provincia']}</p>
                 </div>
                 """, unsafe_allow_html=True)
