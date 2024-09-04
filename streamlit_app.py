@@ -111,7 +111,9 @@ st.markdown("""
 
 
 
-
+# Descargar stopwords en español
+nltk.download('stopwords')
+stop_words = set(stopwords.words('spanish'))
 
 # Definimos nuestra API Key de chat GPT
 client = OpenAI(api_key=config.API_KEY)
@@ -220,12 +222,6 @@ def main():
             """
             gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
             st.markdown(f'<div class="gpt-output">{gpt_opinion3}</div>', unsafe_allow_html=True)
-
-
-            # Add spider chart
-            st.markdown('<h3 class="section-title">Top 5 términos más importantes</h3>', unsafe_allow_html=True)
-            
-            
 
 
     except Exception as e:
