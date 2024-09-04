@@ -36,12 +36,26 @@ def display_job_offers(data):
     cols = st.columns(n_samples)
     for i, (offer, col) in enumerate(zip(st.session_state.job_offers, cols)):
         with col:
+
+
+
+            
             is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
             card_class = "card" + (" selected" if is_selected else "")
+            
+            
+            with st.expander("Ver Formación"):
+                    st.markdown(f"""
+                    <h3>Funciones</h3>
+                    <p>{offer['Formación']}</p>
+                    """, unsafe_allow_html=True)
+
+            
+            
             with st.container():
                 st.markdown(f"""
                 <div class="{card_class}">
-#                    <h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2>
+                    <h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2>
               
                 """, unsafe_allow_html=True)
                  # Botón de selección espaciado y debajo de los expanders
