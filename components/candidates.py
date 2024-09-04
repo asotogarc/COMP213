@@ -14,18 +14,21 @@ def display_candidates(data):
 
     for i, (candidate, col) in enumerate(zip(st.session_state.candidates, cols)):
 
-          # Expander para los conocimientos
+      
+
+        
+        with col:
+
+                # Expander para los conocimientos
         with st.expander("Ver Conocimientos"):
                 st.markdown(f"""
                 
                 
                 {candidate['Nombre']}
                 """, unsafe_allow_html=True)
-
-        
-        with col:
             # Verificar si el candidato está seleccionado
             is_selected = st.session_state.get('selected_candidate') == candidate
+            
 
             # Botón centrado
             col1, col2, col3 = st.columns([1,2,1])
