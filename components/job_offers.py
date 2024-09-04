@@ -43,10 +43,7 @@ def display_job_offers(data):
                 <div class="{card_class}">
                     <h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2>
                     <div class="offer-details">
-                        <h3>Experiencia</h3>
-                        <p>{offer['Experiencia']}</p>                      
-                        <h3>Provincia</h3>
-                        <p>{offer['Provincia']}</p>
+                 
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
