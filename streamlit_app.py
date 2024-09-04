@@ -245,9 +245,27 @@ def main():
 
             st_echarts(options=options, height="500px")
 
+            # Tabla de comparación detallada
+            st.markdown('<h2 class="section-title">COMPARACIÓN DETALLADA DE TÉRMINOS</h2>', unsafe_allow_html=True)
+            comparison_df = pd.DataFrame({
+                "Término": [term for term, _ in top_terms],
+                "Puntuación Oferta": [f"{score*100:.2f}%" for _, (score, _) in top_terms],
+                "Puntuación Candidato": [f"{score*100:.2f}%" for _, (_, score) in top_terms],
+                "Diferencia": [(offer_score - candidate_score)*100 for _, (offer_score, candidate_score) in top_terms]
+            })                    
+            def color_difference(val):
+                color = 'lightgreen' if val > 0 else 'lightcoral' if val < 0 else 'white'
+                return f'background-color: {color}'
+
+            st.table(comparison_df.style
+                    .format({'Diferencia': '{:.2f}%'})
+                    .applymap(color_difference, subset=['Diferencia'])
+                    .set_properties(**{'color': 'black'}, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato']))
+
     except Exception as e:
         st.error(f"Error al cargar los datos: {e}")
 
 if __name__ == "__main__":
     main()
+
 
