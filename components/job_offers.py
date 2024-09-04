@@ -30,12 +30,7 @@ def display_job_offers(data):
         justify-content: center;
         overflow: hidden;
     }
-    .card-title h3 {
-        margin: 0;
-        text-align: center;
-        font-size: 14px;  /* Ajusta el tamaño de la fuente según sea necesario */
-        line-height: 1.2;  /* Ajusta el espaciado entre líneas */
-    }
+    
     .card-content {
         height: 60px;
         overflow-y: auto;
