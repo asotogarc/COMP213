@@ -47,7 +47,7 @@ def display_job_offers(data):
             with st.expander("Ver Formación"):
                     st.markdown(f"""
                     <h3>Funciones</h3>
-                    <p>{offer['Formación']}</p>
+                    <p><h2><a href="{offer['URL']}" target="_blank" class="offer-link::after">{offer['Nombre']}</a></h2> </p>
                     """, unsafe_allow_html=True)
 
             
