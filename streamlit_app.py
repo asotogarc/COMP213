@@ -111,9 +111,7 @@ st.markdown("""
 
 
 
-# Descargar stopwords en español
-nltk.download('stopwords')
-stop_words = set(stopwords.words('spanish'))
+
 
 # Definimos nuestra API Key de chat GPT
 client = OpenAI(api_key=config.API_KEY)
