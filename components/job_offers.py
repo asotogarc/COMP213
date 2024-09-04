@@ -20,9 +20,6 @@ def display_job_offers(data):
         margin: 10px;
         border-radius: 5px;
     }
-    .selected {
-        background-color: #f0f0f0;
-    }
     </style>
     """, unsafe_allow_html=True)
     
@@ -30,7 +27,7 @@ def display_job_offers(data):
     for i, (offer, col) in enumerate(zip(st.session_state.job_offers, cols)):
         with col:
             is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
-            card_class = "card" + (" selected" if is_selected else "")
+            card_class = "card"
             
             with st.expander("Ver Nombre Oferta"):
                 st.markdown(f"""
@@ -65,14 +62,6 @@ def display_job_offers(data):
                     </div>
                     """, unsafe_allow_html=True)
                 
-                with st.expander("Ver Funciones"):
-                    st.markdown(f"""
-                    <div class="{card_class}">
-                        <h3>Funciones</h3>
-                        <p>{offer['Funciones']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
                 # Expander para los conocimientos
                 with st.expander("Ver Conocimientos"):
                     st.markdown(f"""
@@ -87,6 +76,6 @@ def display_job_offers(data):
                     st.markdown(f"""
                     <div class="{card_class}">
                         <h3>Localidad</h3>
-                        <p>{offer['Localidad'], offer['Provincia']}</p>
+                        <p>{offer['Localidad']}</p>
                     </div>
                     """, unsafe_allow_html=True)
