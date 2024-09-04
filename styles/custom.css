@@ -315,7 +315,7 @@ h1, h2, h3 {
         .reportview-container {
             margin-top: -2em;
         }
-        #MainMenu {visibility: hidden;}
-        .stDeployButton {display:none;}
-        footer {visibility: hidden;}
-        #stDecoration {display:none;}
+ #MainMenu {visibility: hidden;}
+ .stDeployButton {display:none;}
+ footer {visibility: hidden;}
+ #stDecoration {display:none;}
