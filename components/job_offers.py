@@ -56,23 +56,23 @@ def display_job_offers(data):
             with st.expander("Formación necesaria"):
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h3>Funciones</h3>
-                    <p>{offer['Formación']}</p>
+                    <h2>Formación</h2>
+                    <h3>{offer['Formación']}</h3>
                 </div>
                 """, unsafe_allow_html=True)
             
-            with st.expander("Ver Conocimientos"):
+            with st.expander("Conocimientos requeridos"):
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h3>Conocimientos</h3>
-                    <p>{offer['Conocimientos']}</p>
+                    <h2>Conocimientos</h2>
+                    <h3>{offer['Conocimientos']}</h3>
                 </div>
                 """, unsafe_allow_html=True)
             
-            with st.expander("Ver Localidad"):
+            with st.expander("Ubicación donde se realiza el trabajo"):
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h3>Localidad</h3>
-                    <p>{offer['Localidad']}</p>
+                    <h2>Ubicación</h2>
+                    <h3>{offer['Ubicación']}</h3>
                 </div>
                 """, unsafe_allow_html=True)
