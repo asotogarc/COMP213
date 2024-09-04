@@ -120,6 +120,10 @@ stop_words = set(stopwords.words('spanish'))
 # Definimos nuestra API Key de chat GPT
 client = OpenAI(api_key=config.API_KEY)
 
+import streamlit as st
+import pandas as pd
+from fpdf import FPDF
+
 def main():
 
     # Inicializar variables de sesión
@@ -262,10 +266,22 @@ def main():
                     .applymap(color_difference, subset=['Diferencia'])
                     .set_properties(**{'color': 'black'}, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato']))
 
-    except Exception as e:
-        st.error(f"Error al cargar los datos: {e}")
+            # Generar texto elaborado y descargar en PDF
+            gpt_opinion_prompt4 = f"""
+            Eres un científico de datos profesional y tienes que generar un texto elaborado sobre los textos seleccionados. Utiliza toda la información obtenida (similitud de los textos, términos importantes y demás cosas que consideres útil) para crear un análisis detallado y estadístico sobre ambos textos seleccionados.
+            """
+            gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
 
-if __name__ == "__main__":
-    main()
+            def create_pdf(text):
+                pdf = FPDF()
+                pdf.add_page()
+                pdf.set_font("Arial", size=12)
+                pdf.multi_cell(0, 10, text)
+                return pdf
+
+            if st.button("Generar PDF"):
+                pdf = create_pdf(gpt_opinion4)
+                pdf_output = pdf.output(dest='S').encode('latin1')
+                st.download_button(label="Descargar PDF", data=pdf_output, file_name="analisis_textos.pdf
 
 
