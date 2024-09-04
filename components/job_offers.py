@@ -51,13 +51,7 @@ def display_job_offers(data):
                     st.session_state.selected_offer = offer
                 st.rerun()
             
-            with st.expander("Ver Formación"):
-                st.markdown(f"""
-                <div class="{card_class}">
-                    <h2>Formación</h2>
-                    <h3>{offer['Formación']}</h3>
-                </div>
-                """, unsafe_allow_html=True)
+            
             
             with st.expander("Ver Funciones"):
                 st.markdown(f"""
