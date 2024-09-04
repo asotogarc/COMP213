@@ -120,9 +120,6 @@ stop_words = set(stopwords.words('spanish'))
 # Definimos nuestra API Key de chat GPT
 client = OpenAI(api_key=config.API_KEY)
 
-import streamlit as st
-import pandas as pd
-from fpdf import FPDF
 
 def main():
 
