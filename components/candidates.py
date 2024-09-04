@@ -1,6 +1,5 @@
-import streamlit as st
-
 # Importamos las librerias necesarias
+import streamlit as st
 
 def display_candidates(data):
     if 'candidates' not in st.session_state:
@@ -40,6 +39,3 @@ def display_candidates(data):
                     """, unsafe_allow_html=True)
 
             
-
-
-
