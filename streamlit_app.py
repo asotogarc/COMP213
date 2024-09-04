@@ -162,8 +162,6 @@ def main():
             Basándonos en la información de la oferta {st.session_state.selected_offer} y en el de la candidatura {st.session_state.selected_candidate}, opinamos si la oferta se ajusta al perfil del candidato.
             Si la la oferta  se ajusta al perfil de la candidatura enseña un numero y un correo para poder ponerse en contacto con el candidato, no con la empresa que oferta el trabajo.
             No me tienes que dar un resumen del contenido de la oferta y la cnadidatura si no una conclusion desarrollado argumentando muy bien si la candidatura se ajusta bien a la oferta
-            Después de nuestra opinión, mencionamos que mostraremos los resultados del análisis del procesamiento del lenguaje natural de ambos textos. En el caso de que el candidato no encaje con la oferta describirle en que areas puede mejorar y recomendarle libros, cursos, vídeos, etcétera.
-            Debes explicar sencillamente y brevemente que puede haber candidatos que se ajustan bien a un perfil pero que la comparación del texto de su candidatura con el de la oferta puede presentar un  bajo porcentaje de similitud
             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
@@ -175,12 +173,10 @@ def main():
             st.markdown(f"""
             <div class="comparison-result" style="display: flex; justify-content: center;">
                 <div class="comparison-card offer-card" style="margin: 0 10px;">
-                    <h3>OFERTA</h3>
+                    <h3>SIMIKITUD DE AMBOS TEXTOS</h3>
                     <h4>{st.session_state.selected_offer['Nombre']}</h4>
                     <p class="info-trigger">Ver información completa</p>
-                    <div class="similarity-score" style="color: {'#4CAF50' if similarity > 70 else '#FFA500' if similarity > 50 else '#FF0000'};">
                         {similarity:.2f}%
-                    </div>
                 </div>
 
                 </div>
