@@ -63,9 +63,10 @@ def display_candidates(data):
             # Expander para la experiencia
             with st.expander("Ver Ubicación"):
                 st.markdown(f"""
-                {candidate[['Localidad', 'Provincia']].to_string(index=False)}
+                
+                
+                {candidate['Localidad']}
                 """, unsafe_allow_html=True)
-
 
                         # Expander para la experiencia
 
