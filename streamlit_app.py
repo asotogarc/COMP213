@@ -82,6 +82,28 @@ st.markdown("""
         #stDecoration {display:none;}
         header {visibility: hidden;}
         [data-testid="stToolbar"] {visibility: hidden !important;}
+
+      .comparison-result {
+        background-color: #f0f4f8;  /* Light blue-gray background */
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .comparison-card {
+        background-color: white;
+        border: 2px solid #4a5568;  /* Dark blue-gray border */
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .offer-card, .candidate-card {
+        border-color: #2b6cb0;  /* Darker blue border for offer and candidate cards */
+    }
+    .similarity-score {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
 </style>
 """, unsafe_allow_html=True)
 
