@@ -11,7 +11,7 @@ def display_candidates(data):
     
     st.markdown('<h2>POSTULACIONES</h2>', unsafe_allow_html=True)
     
-    # Estilo CSS personalizado con animación y ajuste automático de altura
+    # Estilo CSS actualizado para permitir expansión automática
     st.markdown("""
     <style>
     @keyframes fadeIn {
@@ -45,7 +45,6 @@ def display_candidates(data):
         padding: 10px;
     }
     .card-content {
-        overflow-y: auto;
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
@@ -66,6 +65,8 @@ def display_candidates(data):
     }
     .streamlit-expanderContent {
         border: none !important;
+        max-height: none !important;
+        overflow: visible !important;
     }
     </style>
     """, unsafe_allow_html=True)
