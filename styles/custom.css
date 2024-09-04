@@ -311,3 +311,11 @@ h1, h2, h3 {
     margin: 1rem 0;
     border-radius: 5px;
 }
+
+        .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        .stDeployButton {display:none;}
+        footer {visibility: hidden;}
+        #stDecoration {display:none;}
