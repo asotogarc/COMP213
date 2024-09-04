@@ -270,6 +270,8 @@ def main():
             Eres un científico de datos profesional y tienes que generar un texto elaborado sobre los textos seleccionados. Utiliza toda la información obtenida (similitud de los textos, términos importantes y demás cosas que consideres útil) para crear un análisis detallado y estadístico sobre ambos textos seleccionados.
             """
             gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
+            st.markdown(f'<div class="gpt-output">{gpt_opinion2}</div>', unsafe_allow_html=True)
+
 
  
 
