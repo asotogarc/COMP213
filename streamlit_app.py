@@ -8,7 +8,7 @@ from components.comparison import get_gpt_explanation
 from utills.data_processing import calculate_similarity
 from components.job_offers import display_job_offers
 from google_sheets import read_sheet 
-from google_sheets import write sheets
+from google_sheets import write_sheets
 from utills.visualization import display_bar_chart
 from streamlit_echarts import st_echarts
 
