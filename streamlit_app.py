@@ -80,7 +80,6 @@ st.markdown("""
         }
         #MainMenu {visibility: hidden;}
         .stDeployButton {display:none;}
-        footer {visibility: hidden;}
         #stDecoration {display:none;}
         header {visibility: hidden;}
         [data-testid="stToolbar"] {visibility: hidden !important;}
