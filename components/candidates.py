@@ -47,12 +47,13 @@ def display_candidates(data):
     """, unsafe_allow_html=True)
     cols = st.columns(n_samples)
     for i, (candidate, col) in enumerate(zip(st.session_state.candidates, cols)):
-        with col:
-            is_selected = 'selected_candidate' in st.session_state and st.session_state.selected_candidate == candidate
-            card_class = "card" + (" selected" if is_selected else "")
-            st.markdown(f"""
-            <div class="{card_class}">
-                <h2>{candidate['Nombre']}</h2>
+        
+        with st.expander("Ver Nombre del candidato"):
+                st.markdown(f"""
+                <div class="expander-content">
+                    <h3>Ubicación</h3>
+                    <p>{candidate['Nombre']}</p>
+                </div>
 
             </div>
             """, unsafe_allow_html=True)
