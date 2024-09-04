@@ -6,6 +6,8 @@ from nltk.corpus import stopwords
 import nltk
 from components.comparison import get_gpt_explanation
 from components.job_offers import display_job_offers
+from components.candidates import display_job_offers2
+
 from google_sheets import read_sheet
 from utills.visualization import display_bar_chart
 from streamlit_echarts import st_echarts
