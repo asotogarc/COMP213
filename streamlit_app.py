@@ -23,6 +23,7 @@ st.markdown("""
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
+        background: #556DAC;
     }
     h1, h2, h3 {
         color: #1E3A8A;
