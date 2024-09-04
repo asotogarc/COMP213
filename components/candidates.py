@@ -53,13 +53,7 @@ def display_candidates(data):
             st.markdown(f"""
             <div class="{card_class}">
                 <h2>{candidate['Nombre']}</h2>
-              
-                <h3>Idiomas</h3>
-                <p>{candidate['Idiomas']}</p>
-                <h3>Localidad</h3>
-                <p>{candidate['Localidad']}</p>
-                <h3>Provincia</h3>
-                <p>{candidate['Provincia']}</p>
+
             </div>
             """, unsafe_allow_html=True)
             # Botón centrado
