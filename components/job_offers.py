@@ -25,7 +25,7 @@ def display_job_offers(data):
         justify-content: space-between;
     }
     .card h3 {
-        margin-top: 20px; /* Añadir margen superior de 20 píxeles */
+        margin-top: 50px; /* Añadir margen superior de 20 píxeles */
     }
     </style>
     """, unsafe_allow_html=True)
