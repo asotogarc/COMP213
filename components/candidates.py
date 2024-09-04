@@ -50,3 +50,11 @@ def display_candidates(data):
                 
                 {candidate['Experiencia']}
                 """, unsafe_allow_html=True)
+
+            # Expander para la experiencia
+            with st.expander("Ver Idiomas"):
+                st.markdown(f"""
+                
+                
+                {candidate['Idiomas']}
+                """, unsafe_allow_html=True)
