@@ -191,16 +191,7 @@ def main():
                         {similarity:.2f}%
                     </div>
                 </div>
-                <div class="comparison-card candidate-card" style="margin: 0 10px;">
-                    <h3>CANDIDATURA</h3>
-                    <h4>{st.session_state.selected_candidate['Nombre']}</h4>
-                    <p class="info-trigger">Ver candidatura completa</p>
-                    <div class="full-info">
-                        <p><strong>Formación:</strong> {st.session_state.selected_candidate['Formación']}</p>
-                        <p><strong>Conocimientos:</strong> {st.session_state.selected_candidate['Conocimientos']}</p>
-                        <p><strong>Experiencia:</strong> {st.session_state.selected_candidate['Experiencia']}</p>
-                        <p><strong>Idiomas:</strong> {st.session_state.selected_candidate['Idiomas']}</p>
-                    </div>
+              
                 </div>
             </div>
             """, unsafe_allow_html=True)
