@@ -347,25 +347,25 @@ def main():
                 "Puntuación Candidato": [f"{score*100:.2f}%" for _, (_, score) in top_terms],
                 "Diferencia": [(offer_score - candidate_score)*100 for _, (offer_score, candidate_score) in top_terms]
             })                    
-            def color_difference(val):
+        def color_difference(val):
                 color = 'lightgreen' if val > 0 else 'lightcoral' if val < 0 else 'white'
                 return f'background-color: {color}'
 
-            st.table(comparison_df.style
+        st.table(comparison_df.style
                     .format({'Diferencia': '{:.2f}%'})
                     .applymap(color_difference, subset=['Diferencia'])
                     .set_properties(**{'color': 'black'}, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato']))
 
-            st.markdown("<br><br>", unsafe_allow_html=True)
-            st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
 
             # Generar texto elaborado y descargar en PDF
-            st.markdown('<h2 class="section-title">VISIÓN Y CONCLUSIÓN ESTADÍSTICA</h2>', unsafe_allow_html=True)
+        st.markdown('<h2 class="section-title">VISIÓN Y CONCLUSIÓN ESTADÍSTICA</h2>', unsafe_allow_html=True)
 
-            st.markdown("<br><br>", unsafe_allow_html=True)
-            st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
 
-            gpt_opinion_prompt4 = f"""
+        gpt_opinion_prompt4 = f"""
             Realiza un análisis estadistico y cientifico de datos , completo, profesional y serio sobre los siguientes textos relacionados con una oferta de trabajo
             y una candidatura.
             (texto de la oferta = {st.session_state.selected_offer}) (texto de la candidature = {st.session_state.selected_candidate}).
@@ -374,7 +374,7 @@ def main():
             No me des al principio del mensaje esto: ### Análisis Estadístico y Científico de la Oferta de Trabajo y la Candidatura
 
             """
-            gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
+        gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
             st.markdown(f'<div class="gpt-output">{gpt_opinion4}</div>', unsafe_allow_html=True)
 
 
