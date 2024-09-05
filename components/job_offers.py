@@ -1,4 +1,5 @@
- import streamlit as st
+import streamlit as st
+
 def display_job_offers(data):
     if 'job_offers' not in st.session_state:
         st.session_state.job_offers = data.sample(n=min(3, len(data))).to_dict('records')
