@@ -214,6 +214,8 @@ def main():
             Basándonos en la información de la oferta {st.session_state.selected_offer} y en el de la candidatura {st.session_state.selected_candidate}, opinamos si la oferta se ajusta al perfil del candidato.
             Si la oferta se ajusta al perfil de la candidatura enseña un número y un correo para poder ponerse en contacto con el candidato, no con la empresa que oferta el trabajo.
             No me tienes que dar un resumen del contenido de la oferta y la candidatura sino una conclusión desarrollada argumentando muy bien si la candidatura se ajusta bien a la oferta.
+            Asegurate que cuando haya un punto aparte o este signo ":" haya un salto de linea.
+            Quiero que el texto este bien estrucutrado, con subsecciones, posibles listados, etcétera.
             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
