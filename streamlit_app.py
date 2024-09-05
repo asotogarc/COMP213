@@ -382,6 +382,7 @@ def main():
             Realiza un análisis estadistico y cientifico de datos , completo, profesional y serio sobre los siguientes textos relacionados con una oferta de trabajo
             y una candidatura.
             (texto de la oferta = {st.session_state.selected_offer}) (texto de la candidature = {st.session_state.selected_candidate}).
+            En la sección del analisis en la que describes la oferta y la candidatura no neceisot que me des todos los datos de la oferta y la candidatura, con un resumen de ambas me basta.
             Utiliza toda la información obtenida (similitud de los textos= [{similarity:.2f}], términos importantes = [{top_terms}]  y demás cosas que consideres útil)
             para crear un análisis detallado y estadístico sobre ambos textos seleccionados.  Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             No me des al principio del mensaje esto: ### Análisis Estadístico y Científico de la Oferta de Trabajo y la Candidatura
