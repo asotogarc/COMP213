@@ -146,6 +146,9 @@ def remove_stop_words(text):
     return ' '.join(filtered_words)
 
 
+st.markdown('<h1 class="main-title">EINNOVA DEVELOPMENT</h1>', unsafe_allow_html=True)
+
+
 def main():
 
     # Inicializar variables de sesión
