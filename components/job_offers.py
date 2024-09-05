@@ -64,7 +64,6 @@ def display_job_offers(data):
                     st.session_state.selected_offer = None
                 else:
                     st.session_state.selected_offer = offer
-                st.experimental_rerun()
             
             # La tarjeta ahora es solo visual, el botón maneja la interacción
             st.markdown(f"""
@@ -75,4 +74,4 @@ def display_job_offers(data):
             """, unsafe_allow_html=True)
 
     # Actualizar el estado sin recargar la página
-    st.write("")  # Este espacio en blanco fuerza una actualización sutil sin recargar toda la página
+    st.empty()  # Este espacio en blanco fuerza una actualización sutil sin recargar toda la página
