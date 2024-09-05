@@ -292,49 +292,49 @@ def main():
                 for term, (offer_score, candidate_score) in top_terms
             ]
 
-    options = {
-    "legend": {
-        "data": ["Oferta", "Candidato"],
-        "textStyle": {
-            "color": "#ffe5ff",
-            "fontSize": 16  # Aumentar el tamaño de la fuente de la leyenda
-        }
-    },
-    "radar": {
-        "indicator": [
-            {
-                "name": item["name"],
-                "max": 100,
-                "nameTextStyle": {
-                    "fontSize": 14,  # Aumentar el tamaño de la fuente de los indicadores
-                    "fontWeight": "bold"  # Hacer el texto más grueso
-                }
-            } for item in radar_data
-        ],
-        "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
-        "axisName": {
-            "fontSize": 14,  # Aumentar el tamaño de la fuente de los nombres de los ejes
-            "fontWeight": "bold"  # Hacer el texto más grueso
-        }
-    },
-    "series": [{
-        "type": "radar",
-        "data": [
-            {
-                "value": [item["oferta"] for item in radar_data],
-                "name": "Oferta",
-                "itemStyle": {"color": "#4CAF50"},
-                "areaStyle": {"color": "rgba(76,175,80,0.3)"}
-            },
-            {
-                "value": [item["candidato"] for item in radar_data],
-                "name": "Candidato",
-                "itemStyle": {"color": "#2196F3"},
-                "areaStyle": {"color": "rgba(33,150,243,0.3)"}
+        options = {
+        "legend": {
+            "data": ["Oferta", "Candidato"],
+            "textStyle": {
+                "color": "#ffe5ff",
+                "fontSize": 16  # Aumentar el tamaño de la fuente de la leyenda
             }
-        ]
-    }]
-}
+        },
+        "radar": {
+            "indicator": [
+                {
+                    "name": item["name"],
+                    "max": 100,
+                    "nameTextStyle": {
+                        "fontSize": 14,  # Aumentar el tamaño de la fuente de los indicadores
+                        "fontWeight": "bold"  # Hacer el texto más grueso
+                    }
+                } for item in radar_data
+            ],
+            "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
+            "axisName": {
+                "fontSize": 14,  # Aumentar el tamaño de la fuente de los nombres de los ejes
+                "fontWeight": "bold"  # Hacer el texto más grueso
+            }
+        },
+        "series": [{
+            "type": "radar",
+            "data": [
+                {
+                    "value": [item["oferta"] for item in radar_data],
+                    "name": "Oferta",
+                    "itemStyle": {"color": "#4CAF50"},
+                    "areaStyle": {"color": "rgba(76,175,80,0.3)"}
+                },
+                {
+                    "value": [item["candidato"] for item in radar_data],
+                    "name": "Candidato",
+                    "itemStyle": {"color": "#2196F3"},
+                    "areaStyle": {"color": "rgba(33,150,243,0.3)"}
+                }
+            ]
+        }]
+    }
             st_echarts(options=options, height="1000px")
 
             st.markdown("<br><br>", unsafe_allow_html=True)
