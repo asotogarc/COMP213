@@ -156,7 +156,7 @@ def remove_stop_words(text):
     return ' '.join(filtered_words)
 
 
-st.markdown('<h1 class="main-title">COMPARADOR DE OFERTAS  CANDIDATURAS DE TRABAJO - EINNOVA DEVELOPMENT</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">COMPARADOR DE OFERTAS Y CANDIDATURAS DE TRABAJO - EINNOVA DEVELOPMENT</h1>', unsafe_allow_html=True)
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("<br><br>", unsafe_allow_html=True)
