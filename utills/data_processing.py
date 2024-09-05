@@ -8,15 +8,22 @@ import nltk
 nltk.download('stopwords')
 stop_words = set(stopwords.words('spanish'))
 
+# Función para limpiar el texto
+def clean_text(text):
+    return ' '.join([word for word in text.split() if word.lower() not in stop_words])
+
 # Comparamos la similitud entre una oferta y una candidatura
 def calculate_similarity(offer, candidate):
-    tfidf = TfidfVectorizer(stop_words=list(stop_words))
+    # Limpiamos los textos
+    offer_text = clean_text(f"{offer['Formación']} {offer['Conocimientos']} {offer['Experiencia']} {offer['Funciones']}")
+    candidate_text = clean_text(f"{candidate['Formación']} {candidate['Conocimientos']} {candidate['Experiencia']}")
     
-    # Eliminamos las stop words de los textos
-    offer_text = ' '.join([word for word in f"{offer['Formación']} {offer['Conocimientos']} {offer['Experiencia']} {offer['Funciones']}".split() if word.lower() not in stop_words])
-    candidate_text = ' '.join([word for word in f"{candidate['Formación']} {candidate['Conocimientos']} {candidate['Experiencia']}".split() if word.lower() not in stop_words])
+    # Creamos el vectorizador TF-IDF sin especificar stopwords (ya las hemos eliminado)
+    tfidf = TfidfVectorizer()
     
+    # Transformamos los textos
     X = tfidf.fit_transform([offer_text, candidate_text])
+    
     cosine_sim = cosine_similarity(X[0:1], X[1:2])[0][0]
     feature_names = tfidf.get_feature_names_out()
     offer_scores = X[0].toarray()[0]
