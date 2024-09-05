@@ -237,12 +237,17 @@ def main():
              para comparar la similitud de los dos textos, utilizamos técnicas de PLN como la tokenización, la vectorización y el cálculo de la distancia entre vectores,
              las cuales son técnicas que nos permiten cuantificar la similitud entre los textos de manera precisa y objetiva.
 
+             
+            
              Debes explicar que puede haber casos en los que haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos
              de las ofertas debido a cómo se ha redactado la candidatura y los términos usados.
 
              Asegurate que cuando haya un punto aparte o este signo ":" haya un salto de linea.
              Quiero que el texto este bien estructurado, con subsecciones, posibles listados, etcétera. No me des en el texto : ### Análisis de la Oferta y la Candidatura. 
              Entre el fin y el comienzo de una subseccion o seccion debe haber una linea horizontal separadora
+
+             Asegurate que en el texto que me des no darme así este texto  ### Procesamiento de Lenguaje Natural (PLN)
+
 
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
@@ -268,6 +273,11 @@ def main():
              de la oferta y el de la candidatura: {similarity:.2f}. Recuerda evitar sacar conclusiones relacionadas con que el candidato no se ajusta a la oferta, ya que puede haber casos en los que
              haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos de las ofertas debido a cómo se ha redactado la candidatura y los términos usados.
 
+             Asegurate que cuando haya un punto aparte o este signo ":" haya un salto de linea.
+             Quiero que el texto este bien estructurado, con subsecciones, posibles listados, etcétera. No me des en el texto : ### Análisis de la Oferta y la Candidatura. 
+             Entre el fin y el comienzo de una subseccion o seccion debe haber una linea horizontal separadora
+
+ 
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
@@ -283,8 +293,7 @@ def main():
             ]
 
             options = {
-                "title": {"text": "Comparación de Términos Clave", "textStyle": {"color": "#2c3e50"}},
-                "legend": {"data": ["Oferta", "Candidato"], "textStyle": {"color": "#34495e"}},
+                "legend": {"data": ["Oferta", "Candidato"], "textStyle": {"color": "#ffe5ff"}},
                 "radar": {
                     "indicator": [{"name": item["name"], "max": 100} for item in radar_data],
                     "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
@@ -308,7 +317,7 @@ def main():
                 }]
             }
 
-            st_echarts(options=options, height="500px")
+            st_echarts(options=options, height="1000px")
 
             st.markdown("<br><br>", unsafe_allow_html=True)
             st.markdown("<br><br>", unsafe_allow_html=True)
