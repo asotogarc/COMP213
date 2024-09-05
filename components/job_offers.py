@@ -24,28 +24,28 @@ def display_job_offers(data):
         justify-content: space-between;
     }
     .card-title {
-        min-height: 220px;  /* Aumentada la altura mínima del título */
+        min-height: 120px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background-color: #007bff;  /* Color de fondo azul */
-        border-radius: 5px 5px 0 0;  /* Bordes redondeados solo arriba */
-        padding: 10px;  /* Añadido padding para mejor apariencia */
+        background-color: #007bff;
+        border-radius: 5px 5px 0 0;
+        padding: 10px;
     }
     .card-title h3 {
-        margin: 0 0 10px 0;  /* Añadido margen inferior */
+        margin: 0 0 10px 0;
         text-align: center;
-        font-size: 18px;  /* Tamaño de la fuente */
-        line-height: 1.3;  /* Espaciado entre líneas */
-        color: white;  /* Color del texto blanco */
+        font-size: 18px;
+        line-height: 1.3;
+        color: white;
     }
     .card-title p {
         margin: 0;
         text-align: center;
-        font-size: 14px;  /* Tamaño de la fuente para la formación */
-        line-height: 1.2;  /* Espaciado entre líneas */
-        color: white;  /* Color del texto blanco */
+        font-size: 14px;
+        line-height: 1.2;
+        color: white;
     }
     .card-content {
         height: 60px;
@@ -58,6 +58,15 @@ def display_job_offers(data):
         margin: 0;
         text-align: center;
     }
+    .card-link {
+        text-align: center;
+        margin-top: 10px;
+    }
+    .card-link a {
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+    }
     </style>
     """, unsafe_allow_html=True)
     
@@ -67,12 +76,15 @@ def display_job_offers(data):
             is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
             card_class = "card"
             
-            # Mostrar el nombre de la oferta y la formación en la tarjeta con altura fija
+            # Mostrar el nombre de la oferta, la formación y el enlace en la tarjeta
             st.markdown(f"""
             <div class="{card_class}">
                 <div class="card-title">
-                    <h4>{offer['Nombre']}</h4>
-                    <h3>{offer['Formación']}</h3>
+                    <h3>{offer['Nombre']}</h3>
+                    <p>{offer['Formación']}</p>
+                    <div class="card-link">
+                        <a href="{offer['URL']}" target="_blank">🔗</a>
+                    </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
