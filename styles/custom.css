@@ -154,7 +154,7 @@ h2 {
     color: #2c3e50;
 }
 .gpt-output {
-    background-color: #800080;
+    background-color: #008000 ;
     border-left: 5px solid #007bff;
     padding: 1rem;
     margin: 1rem 0;
@@ -300,7 +300,7 @@ h1, h2, h3 {
 }
 
 .gpt-output {
-    background-color: #800080; /* Un morado similar al de la imagen */
+    background-color: #008000 ; /* Un morado similar al de la imagen */
     color: white;
     padding: 2rem;
     margin: 1.5rem 0;
