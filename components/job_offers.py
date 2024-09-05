@@ -24,7 +24,7 @@ def display_job_offers(data):
         justify-content: space-between;
     }
     .card-title {
-        min-height: 140px;  /* Increased to accommodate the new link text */
+        min-height: 140px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -41,7 +41,7 @@ def display_job_offers(data):
         color: white;
     }
     .card-title p {
-        margin: 0 0 10px 0;  /* Added bottom margin */
+        margin: 0 0 10px 0;
         text-align: center;
         font-size: 14px;
         line-height: 1.2;
@@ -62,17 +62,17 @@ def display_job_offers(data):
         text-align: center;
         margin-top: 10px;
     }
-    .card-link a {
+    .stButton > button {
+        width: 100%;
+        background-color: rgba(255,255,255,0.2);
         color: white;
-        text-decoration: none;
-        font-size: 14px;  /* Reduced font size */
-        background-color: rgba(255,255,255,0.2);  /* Semi-transparent white background */
-        padding: 5px 10px;  /* Added padding */
-        border-radius: 5px;  /* Rounded corners */
-        transition: background-color 0.3s;  /* Smooth transition for hover effect */
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
     }
-    .card-link a:hover {
-        background-color: rgba(255,255,255,0.3);  /* Slightly lighter on hover */
+    .stButton > button:hover {
+        background-color: rgba(255,255,255,0.3);
     }
     </style>
     """, unsafe_allow_html=True)
@@ -83,37 +83,28 @@ def display_job_offers(data):
             is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
             card_class = "card"
             
-            # Mostrar el nombre de la oferta, la formación y el enlace en la tarjeta
+            # Mostrar el nombre de la oferta y la formación en la tarjeta
             st.markdown(f"""
             <div class="{card_class}">
                 <div class="card-title">
                     <h3>{offer['Nombre']}</h3>
                     <p>{offer['Formación']}</p>
-                    <div class="card-link">
-                        <a href="{offer['URL']}" target="_blank">(Seleccionar Oferta)</a>
-                    </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
             
-            # Botón de selección espaciado y debajo de los expanders
-            if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar'} Oferta", key=f"offer_{i}"):
+            # Botón de selección dentro de la tarjeta
+            if st.button(f"{'Deseleccionar' if is_selected else '(Seleccionar Oferta)'}", key=f"offer_{i}"):
                 if is_selected:
                     st.session_state.selected_offer = None
                 else:
                     st.session_state.selected_offer = offer
                 st.rerun()
             
-            with st.expander("Conocimientos requeridos"):
-                st.markdown(f"""
-                <div class="card-content">
-                    <p>{offer['Conocimientos']}</p>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            with st.expander("Ubicación donde se realiza el trabajo"):
-                st.markdown(f"""
-                <div class="card-content">
-                    <p>{offer['Localidad']}</p>
-                </div>
-                """, unsafe_allow_html=True)
+            # Mostrar el enlace a la oferta
+            st.markdown(f"[Ver oferta completa]({offer['URL']})", unsafe_allow_html=True)
+
+    # Si hay una oferta seleccionada, mostrar información adicional
+    if 'selected_offer' in st.session_state and st.session_state.selected_offer:
+        st.markdown("## Oferta Seleccionada")
+        st.write(st.session_state.selected_offer)
