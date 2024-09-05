@@ -38,7 +38,7 @@ st.markdown("""
         background: #99006A;
     }
     h1, h3 {
-        color: #1E3A8A;
+        color: #f7efe2;
         text-align: center;
     }
 
