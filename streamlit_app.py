@@ -335,7 +335,7 @@ def main():
             ]
         }]
     }
-            st_echarts(options=options, height="1000px")
+        st_echarts(options=options, height="1000px")
 
             st.markdown("<br><br>", unsafe_allow_html=True)
             st.markdown("<br><br>", unsafe_allow_html=True)
