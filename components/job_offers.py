@@ -65,7 +65,6 @@ def display_job_offers(data):
             <div class="{card_class}">
                 <div class="card-title">
                     <h3>{offer['Nombre']}</h3>
-            
                 </div>
             </div>
             """, unsafe_allow_html=True)
