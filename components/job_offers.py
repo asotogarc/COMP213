@@ -24,7 +24,7 @@ def display_job_offers(data):
         justify-content: space-between;
     }
     .card-title {
-        min-height: 120px;
+        min-height: 140px;  /* Increased to accommodate the new link text */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -41,7 +41,7 @@ def display_job_offers(data):
         color: white;
     }
     .card-title p {
-        margin: 0;
+        margin: 0 0 10px 0;  /* Added bottom margin */
         text-align: center;
         font-size: 14px;
         line-height: 1.2;
@@ -65,7 +65,14 @@ def display_job_offers(data):
     .card-link a {
         color: white;
         text-decoration: none;
-        font-size: 24px;
+        font-size: 14px;  /* Reduced font size */
+        background-color: rgba(255,255,255,0.2);  /* Semi-transparent white background */
+        padding: 5px 10px;  /* Added padding */
+        border-radius: 5px;  /* Rounded corners */
+        transition: background-color 0.3s;  /* Smooth transition for hover effect */
+    }
+    .card-link a:hover {
+        background-color: rgba(255,255,255,0.3);  /* Slightly lighter on hover */
     }
     </style>
     """, unsafe_allow_html=True)
@@ -83,7 +90,7 @@ def display_job_offers(data):
                     <h3>{offer['Nombre']}</h3>
                     <p>{offer['Formación']}</p>
                     <div class="card-link">
-                        <a href="{offer['URL']}" target="_blank">🔗</a>
+                        <a href="{offer['URL']}" target="_blank">(Seleccionar Oferta)</a>
                     </div>
                 </div>
             </div>
@@ -96,3 +103,17 @@ def display_job_offers(data):
                 else:
                     st.session_state.selected_offer = offer
                 st.rerun()
+            
+            with st.expander("Conocimientos requeridos"):
+                st.markdown(f"""
+                <div class="card-content">
+                    <p>{offer['Conocimientos']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with st.expander("Ubicación donde se realiza el trabajo"):
+                st.markdown(f"""
+                <div class="card-content">
+                    <p>{offer['Localidad']}</p>
+                </div>
+                """, unsafe_allow_html=True)
