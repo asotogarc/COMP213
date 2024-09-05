@@ -240,6 +240,10 @@ def main():
              Debes explicar que puede haber casos en los que haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos
              de las ofertas debido a cómo se ha redactado la candidatura y los términos usados.
 
+             Asegurate que cuando haya un punto aparte o este signo ":" haya un salto de linea.
+             Quiero que el texto este bien estructurado, con subsecciones, posibles listados, etcétera. No me des en el texto : ### Análisis de la Oferta y la Candidatura. 
+             Entre el fin y el comienzo de una subseccion o seccion debe haber una linea horizontal separadora
+
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion2 = get_gpt_explanation(gpt_opinion_prompt2)
