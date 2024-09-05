@@ -215,8 +215,8 @@ def main():
             Si la oferta se ajusta al perfil de la candidatura enseña un número y un correo para poder ponerse en contacto con el candidato, no con la empresa que oferta el trabajo.
             No me tienes que dar un resumen del contenido de la oferta y la candidatura sino una conclusión desarrollada argumentando muy bien si la candidatura se ajusta bien a la oferta.
             Asegurate que cuando haya un punto aparte o este signo ":" haya un salto de linea.
-            Quiero que el texto este bien estructurado, con subsecciones, posibles listados, etcétera. No me des el título: ### Análisis de la Oferta y la Candidatura. 
-            Asegurate que haya suficinetes espacios de lineas entre el fin y el comienzo de subsecciones para que el texto se vea limpio visualmente.
+            Quiero que el texto este bien estructurado, con subsecciones, posibles listados, etcétera. No me des en el texto : ### Análisis de la Oferta y la Candidatura. 
+            Entre el fin y el comienzo de una subseccion o seccion debe haber una linea horizontal separadora
             Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion = get_gpt_explanation(gpt_opinion_prompt)
