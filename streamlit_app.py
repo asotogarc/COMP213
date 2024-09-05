@@ -11,29 +11,23 @@ from google_sheets import read_sheet
 from utills.visualization import display_bar_chart
 from streamlit_echarts import st_echarts
 from utills.data_processing import calculate_similarity
-from streamlit_echarts import st_echarts
-
 
 # Configuración de la página
 st.set_page_config(page_title="NLPMatchJobs", layout="wide")
 
 st.markdown("""
 <style>
-
     .gpt-output {
-    
-    background-color: #340034 ; /* Un morado similar al de la imagen */
-    color: white;
-    padding: 2rem;
-    margin: 1.5rem 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    
+        background-color: #340034;
+        color: white;
+        padding: 2rem;
+        margin: 1.5rem 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
     }
 </style>
 """, unsafe_allow_html=True)
-
 
 st.markdown("""
 <style>
@@ -49,13 +43,10 @@ st.markdown("""
         color: #f7efe2;
         text-align: center;
     }
-
-    
     h2 {
         color: #f7efe2;
         text-align: center;
     }
-    
     .stButton>button {
         background-color: #1E3A8A;
         color: white;
@@ -100,43 +91,39 @@ st.markdown("""
         background-color: #f79b77;
         color: white;
     }
-       .reportview-container {
-            margin-top: -2em;
-        }
-        #MainMenu {visibility: hidden;}
-        .stDeployButton {display:none;}
-        #stDecoration {display:none;}
-        header {visibility: hidden;}
-        footer {visibility: hidden;}
-        [data-testid="stToolbar"] {visibility: hidden !important;}
-
-      .comparison-result {
-        background-color: #3b3d0f ;  /* Light blue-gray background */
+    .reportview-container {
+        margin-top: -2em;
+    }
+    #MainMenu {visibility: hidden;}
+    .stDeployButton {display:none;}
+    #stDecoration {display:none;}
+    header {visibility: hidden;}
+    footer {visibility: hidden;}
+    [data-testid="stToolbar"] {visibility: hidden !important;}
+    .comparison-result {
+        background-color: #3b3d0f;
         border-radius: 10px;
         padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .comparison-card {
         background-color: white;
-        border: 2px solid #4a5568;  /* Dark blue-gray border */
+        border: 2px solid #4a5568;
         border-radius: 8px;
         padding: 15px;
         margin: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
     .offer-card, .candidate-card {
-        border-color: #2b6cb0;  /* Darker blue border for offer and candidate cards */
+        border-color: #2b6cb0;
     }
     .similarity-score {
         font-size: 24px;
         font-weight: bold;
         text-align: center;
+    }
 </style>
 """, unsafe_allow_html=True)
-
-# Apply custom theme
-
-
 
 # Descargar stopwords en español
 nltk.download('stopwords')
@@ -145,24 +132,10 @@ stop_words = set(stopwords.words('spanish'))
 # Definimos nuestra API Key de chat GPT
 client = OpenAI(api_key=config.API_KEY)
 
-
-# Descargar stopwords en español
-nltk.download('stopwords')
-stop_words = set(stopwords.words('spanish'))
-
-# ... (other imports and configurations remain the same)
-
 def remove_stop_words(text):
     words = text.split()
     filtered_words = [word for word in words if word.lower() not in stop_words]
     return ' '.join(filtered_words)
-# ... (other imports and configurations remain the same)
-
-def remove_stop_words(text):
-    words = text.split()
-    filtered_words = [word for word in words if word.lower() not in stop_words]
-    return ' '.join(filtered_words)
-
 
 st.markdown('<h1 class="main-title">COMPARADOR DE OFERTAS Y CANDIDATURAS DE TRABAJO - EINNOVA DEVELOPMENT</h1>', unsafe_allow_html=True)
 
@@ -170,7 +143,6 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("<br><br>", unsafe_allow_html=True)
 
 def main():
-
     # Inicializar variables de sesión
     if 'selected_offer' not in st.session_state:
         st.session_state.selected_offer = None
@@ -199,9 +171,7 @@ def main():
 
         # Ejecutar comparación automáticamente al seleccionar oferta y candidatura
         if st.session_state.selected_offer and st.session_state.selected_candidate:
-
             similarity, top_terms = calculate_similarity(st.session_state.selected_offer, st.session_state.selected_candidate)
-
             
             # Opinión personalizada del GPT
             gpt_opinion_prompt = f"""
@@ -237,8 +207,6 @@ def main():
              para comparar la similitud de los dos textos, utilizamos técnicas de PLN como la tokenización, la vectorización y el cálculo de la distancia entre vectores,
              las cuales son técnicas que nos permiten cuantificar la similitud entre los textos de manera precisa y objetiva.
 
-             
-            
              Debes explicar que puede haber casos en los que haya candidatos que presenten un bajo porcentaje de similitud con la oferta pero que se ajustan bien a los requerimientos
              de las ofertas debido a cómo se ha redactado la candidatura y los términos usados.
 
@@ -247,7 +215,6 @@ def main():
              Entre el fin y el comienzo de una subseccion o seccion debe haber una linea horizontal separadora
 
              Asegurate que en el texto que me des no darme así este texto  ### Procesamiento de Lenguaje Natural (PLN)
-
 
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
@@ -277,7 +244,6 @@ def main():
              Quiero que el texto este bien estructurado, con subsecciones, posibles listados, etcétera. No me des en el texto : ### Análisis de la Oferta y la Candidatura. 
              Entre el fin y el comienzo de una subseccion o seccion debe haber una linea horizontal separadora
 
- 
              Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             """
             gpt_opinion3 = get_gpt_explanation(gpt_opinion_prompt3)
@@ -293,48 +259,49 @@ def main():
             ]
 
             options = {
-        "legend": {
-            "data": ["Oferta", "Candidato"],
-            "textStyle": {
-                "color": "#ffe5ff",
-                "fontSize": 16  # Aumentar el tamaño de la fuente de la leyenda
-            }
-        },
-        "radar": {
-            "indicator": [
-                {
-                    "name": item["name"],
-                    "max": 100,
-                    "nameTextStyle": {
-                        "fontSize": 14,  # Aumentar el tamaño de la fuente de los indicadores
-                        "fontWeight": "bold"  # Hacer el texto más grueso
+                "legend": {
+                    "data": ["Oferta", "Candidato"],
+                    "textStyle": {
+                        "color": "#ffe5ff",
+                        "fontSize": 16
                     }
-                } for item in radar_data
-            ],
-            "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
-            "axisName": {
-                "fontSize": 14,  # Aumentar el tamaño de la fuente de los nombres de los ejes
-                "fontWeight": "bold"  # Hacer el texto más grueso
-            }
-        },
-        "series": [{
-            "type": "radar",
-            "data": [
-                {
-                    "value": [item["oferta"] for item in radar_data],
-                    "name": "Oferta",
-                    "itemStyle": {"color": "#4CAF50"},
-                    "areaStyle": {"color": "rgba(76,175,80,0.3)"}
                 },
-                {
-                    "value": [item["candidato"] for item in radar_data],
-                    "name": "Candidato",
-                    "itemStyle": {"color": "#2196F3"},
-                    "areaStyle": {"color": "rgba(33,150,243,0.3)"}
-                }
-            ]
-        }]
-    }
+                "radar": {
+                    "indicator": [
+                        {
+                            "name": item["name"],
+                            "max": 100,
+                            "nameTextStyle": {
+                                "fontSize": 14,
+                                "fontWeight": "bold"
+                            }
+                        } for item in radar_data
+                    ],
+                    "splitArea": {"areaStyle": {"color": ["rgba(250,250,250,0.3)", "rgba(200,200,200,0.3)"]}},
+                    "axisName": {
+                        "fontSize": 14,
+                        "fontWeight": "bold"
+                    }
+                },
+                "series": [{
+                    "type": "radar",
+                    "data": [
+                        {
+                            "value": [item["oferta"] for item in radar_data],
+                            "name": "Oferta",
+                            "itemStyle": {"color": "#4CAF50"},
+                            "areaStyle": {"color": "rgba(76,175,80,0.3)"}
+                        },
+                        {
+                            "value": [item["candidato"] for item in radar_data],
+                            "name": "Candidato",
+                            "itemStyle": {"color": "#2196F3"},
+                            "areaStyle": {"color": "rgba(33,150,243,0.3)"}
+                        }
+                    ]
+                }]
+            }
+
             st_echarts(options=options, height="1000px")
 
             st.markdown("<br><br>", unsafe_allow_html=True)
@@ -372,19 +339,12 @@ def main():
             Utiliza toda la información obtenida (similitud de los textos= [{similarity:.2f}], términos importantes = [{top_terms}]  y demás cosas que consideres útil)
             para crear un análisis detallado y estadístico sobre ambos textos seleccionados.  Usamos la primera persona del plural y evitamos respuestas robóticas o frases como "¡Claro!" o "¡Vamos a ello!".
             No me des al principio del mensaje esto: ### Análisis Estadístico y Científico de la Oferta de Trabajo y la Candidatura
-
             """
             gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
             st.markdown(f'<div class="gpt-output">{gpt_opinion4}</div>', unsafe_allow_html=True)
-
-
- 
 
     except Exception as e:
         st.error(f"Error al cargar los datos: {e}")
 
 if __name__ == "__main__":
     main()
-
-
-
