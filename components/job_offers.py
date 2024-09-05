@@ -26,6 +26,7 @@ def display_job_offers(data):
         color: white;
         text-align: center;
         transition: border 0.3s ease;
+        cursor: pointer;
     }
     .card.selected {
         border: 5px solid #28a745;
@@ -46,18 +47,6 @@ def display_job_offers(data):
     .card-link:hover {
         text-decoration: underline;
     }
-    .stButton > button {
-        width: 100%;
-        background-color: rgba(255,255,255,0.2);
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-    .stButton > button:hover {
-        background-color: rgba(255,255,255,0.3);
-    }
     </style>
     """, unsafe_allow_html=True)
     
@@ -69,16 +58,21 @@ def display_job_offers(data):
             is_selected = st.session_state.selected_offer == offer
             card_class = "card selected" if is_selected else "card"
             
+            # Usamos un botón invisible que cubre toda la tarjeta
+            if st.button("", key=f"offer_{i}", help="Haz clic para seleccionar/deseleccionar"):
+                if is_selected:
+                    st.session_state.selected_offer = None
+                else:
+                    st.session_state.selected_offer = offer
+                st.experimental_rerun()
+            
+            # La tarjeta ahora es solo visual, el botón maneja la interacción
             st.markdown(f"""
             <div class="{card_class}">
                 <div class="card-title">{offer['Nombre']}</div>
                 <div class="card-formation">{offer['Formación']} <a href="{offer['URL']}" target="_blank" class="card-link">🔗</a></div>
             </div>
             """, unsafe_allow_html=True)
-            
-            button_text = "Deseleccionar" if is_selected else "Seleccionar oferta"
-            if st.button(button_text, key=f"offer_{i}"):
-                st.session_state.selected_offer = None if is_selected else offer
 
     # Actualizar el estado sin recargar la página
     st.write("")  # Este espacio en blanco fuerza una actualización sutil sin recargar toda la página
