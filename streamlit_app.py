@@ -136,6 +136,7 @@ def remove_stop_words(text):
     words = text.split()
     filtered_words = [word for word in words if word.lower() not in stop_words]
     return ' '.join(filtered_words)
+st.markdown("<br><br>", unsafe_allow_html=True)
 
 st.markdown('<h1 class="main-title">COMPARADOR DE OFERTAS Y CANDIDATURAS DE TRABAJO - EINNOVA DEVELOPMENT</h1>', unsafe_allow_html=True)
 
