@@ -24,7 +24,7 @@ def display_job_offers(data):
         justify-content: space-between;
     }
     .card-title {
-        min-height: 120px;  /* Aumentada la altura mínima del título */
+        min-height: 220px;  /* Aumentada la altura mínima del título */
         display: flex;
         flex-direction: column;
         align-items: center;
