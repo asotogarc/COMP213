@@ -30,7 +30,7 @@ st.markdown("""
 st.markdown("""
 <style>
     .reportview-container {
-        background: #556DAC
+        background: #99006A
     }
     .main .block-container {
         padding-top: 2rem;
