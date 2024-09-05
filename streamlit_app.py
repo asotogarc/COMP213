@@ -19,6 +19,16 @@ st.set_page_config(page_title="NLPMatchJobs", layout="wide")
 
 st.markdown("""
 <style>
+
+    .gpt-output {
+        text-align: justify;  /* Add this line to justify the text */
+    }
+</style>
+""", unsafe_allow_html=True)
+
+
+st.markdown("""
+<style>
     .reportview-container {
         background: #556DAC
     }
