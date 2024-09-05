@@ -320,16 +320,55 @@ def main():
                 "Puntuación Oferta": [f"{score*100:.2f}%" for _, (score, _) in top_terms],
                 "Puntuación Candidato": [f"{score*100:.2f}%" for _, (_, score) in top_terms],
                 "Diferencia": [(offer_score - candidate_score)*100 for _, (offer_score, candidate_score) in top_terms]
-            })                    
+            })
+            
             def color_difference(val):
-                color = 'lightgreen' if val > 0 else 'lightcoral' if val < 0 else 'white'
-                return f'background-color: {color}'
-
+                if isinstance(val, str):
+                    val = float(val.strip('%'))
+                color = '#4CAF50' if val > 0 else '#FF5252' if val < 0 else '#FFFFFF'
+                text_color = '#FFFFFF' if val != 0 else '#000000'
+                return f'background-color: {color}; color: {text_color}'
+            
+            st.markdown("""
+            <style>
+                .dataframe {
+                    font-family: Arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                .dataframe th {
+                    background-color: #99006A;
+                    color: white;
+                    font-weight: bold;
+                    text-align: left;
+                    padding: 10px;
+                }
+                .dataframe td {
+                    text-align: left;
+                    padding: 8px;
+                }
+                .dataframe tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+            </style>
+            """, unsafe_allow_html=True)
+            
             st.table(comparison_df.style
-                    .format({'Diferencia': '{:.2f}%'})
-                    .applymap(color_difference, subset=['Diferencia'])
-                    .set_properties(**{'color': 'black'}, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato']))
-
+                .format({'Diferencia': '{:.2f}%'})
+                .applymap(color_difference, subset=['Diferencia'])
+                .set_properties(**{
+                    'background-color': '#99006A',
+                    'color': 'white',
+                    'font-weight': 'bold',
+                    'text-align': 'left',
+                    'padding': '10px'
+                }, subset=['Término', 'Puntuación Oferta', 'Puntuación Candidato'])
+                .set_table_styles([
+                    {'selector': 'th', 'props': [('background-color', '#99006A'), ('color', 'white')]},
+                    {'selector': 'td', 'props': [('text-align', 'left'), ('padding', '8px')]},
+                    {'selector': 'tr:nth-child(even)', 'props': [('background-color', '#f2f2f2')]}
+                ])
+            )
             st.markdown("<br><br>", unsafe_allow_html=True)
             st.markdown("<br><br>", unsafe_allow_html=True)
 
