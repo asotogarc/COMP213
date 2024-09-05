@@ -83,8 +83,5 @@ def display_job_offers(data):
             
             if st.button("Seleccionar oferta", key=f"offer_{i}", on_click=select_offer, args=(offer,)):
                 pass  # La lógica de selección se maneja en la función de callback
-    
-    # Mostrar la oferta seleccionada
-    if st.session_state.selected_offer:
-        st.markdown("### Oferta seleccionada:")
-        st.json(st.session_state.selected_offer)
+
+    # La oferta seleccionada ya no se muestra aquí
