@@ -25,9 +25,10 @@ def display_job_offers(data):
         background-color: #007bff;
         color: white;
         text-align: center;
+        transition: border 0.3s ease;
     }
     .card.selected {
-        border-color: #28a745;
+        border: 5px solid #28a745;  /* Borde más grueso y verde para la oferta seleccionada */
     }
     .card-title {
         font-size: 18px;
@@ -79,6 +80,6 @@ def display_job_offers(data):
                         st.session_state.selected_offer = None
                     else:
                         st.session_state.selected_offer = offer
-                    st.rerun()
+                    st.experimental_rerun()
 
     # No mostramos información adicional de la oferta seleccionada
