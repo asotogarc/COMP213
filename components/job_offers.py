@@ -7,6 +7,9 @@ def display_job_offers(data):
     if 'selected_offer' not in st.session_state:
         st.session_state.selected_offer = None
 
+    def select_offer(offer):
+        st.session_state.selected_offer = offer
+
     n_samples = len(st.session_state.job_offers)
     if n_samples == 0:
         st.warning("No hay ofertas de trabajo para mostrar.")
@@ -25,10 +28,11 @@ def display_job_offers(data):
         background-color: #007bff;
         color: white;
         text-align: center;
-        transition: border 0.3s ease;
+        transition: all 0.3s ease;
     }
     .card.selected {
         border: 5px solid #28a745;
+        transform: scale(1.05);
     }
     .card-title {
         font-size: 18px;
@@ -53,10 +57,11 @@ def display_job_offers(data):
         border: none;
         padding: 5px 10px;
         border-radius: 5px;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.3s;
     }
     .stButton > button:hover {
         background-color: rgba(255,255,255,0.3);
+        transform: translateY(-2px);
     }
     </style>
     """, unsafe_allow_html=True)
@@ -76,9 +81,10 @@ def display_job_offers(data):
             </div>
             """, unsafe_allow_html=True)
             
-            button_text = "Deseleccionar" if is_selected else "Seleccionar oferta"
-            if st.button(button_text, key=f"offer_{i}"):
-                st.session_state.selected_offer = None if is_selected else offer
-
-    # Actualizar el estado sin recargar la página
-    st.write("")  # Este espacio en blanco fuerza una actualización sutil sin recargar toda la página
+            if st.button("Seleccionar oferta", key=f"offer_{i}", on_click=select_offer, args=(offer,)):
+                pass  # La lógica de selección se maneja en la función de callback
+    
+    # Mostrar la oferta seleccionada
+    if st.session_state.selected_offer:
+        st.markdown("### Oferta seleccionada:")
+        st.json(st.session_state.selected_offer)
