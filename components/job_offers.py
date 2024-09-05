@@ -79,6 +79,6 @@ def display_job_offers(data):
             button_text = "Deseleccionar" if is_selected else "Seleccionar oferta"
             if st.button(button_text, key=f"offer_{i}"):
                 st.session_state.selected_offer = None if is_selected else offer
-                st.rerun()
+                st.experimental_rerun()
 
     # No es necesario el st.write("") aquí, ya que usamos st.experimental_rerun()
