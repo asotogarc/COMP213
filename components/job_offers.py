@@ -7,8 +7,11 @@ def display_job_offers(data):
     if 'selected_offer' not in st.session_state:
         st.session_state.selected_offer = None
 
-    def select_offer(offer):
-        st.session_state.selected_offer = offer
+    def toggle_offer(offer):
+        if st.session_state.selected_offer == offer:
+            st.session_state.selected_offer = None
+        else:
+            st.session_state.selected_offer = offer
 
     n_samples = len(st.session_state.job_offers)
     if n_samples == 0:
@@ -81,7 +84,6 @@ def display_job_offers(data):
             </div>
             """, unsafe_allow_html=True)
             
-            if st.button("Seleccionar oferta", key=f"offer_{i}", on_click=select_offer, args=(offer,)):
+            button_text = "Deseleccionar oferta" if is_selected else "Seleccionar oferta"
+            if st.button(button_text, key=f"offer_{i}", on_click=toggle_offer, args=(offer,)):
                 pass  # La lógica de selección se maneja en la función de callback
-
-    # La oferta seleccionada ya no se muestra aquí
