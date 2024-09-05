@@ -375,7 +375,7 @@ def main():
 
             """
         gpt_opinion4 = get_gpt_explanation(gpt_opinion_prompt4)
-            st.markdown(f'<div class="gpt-output">{gpt_opinion4}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="gpt-output">{gpt_opinion4}</div>', unsafe_allow_html=True)
 
 
  
