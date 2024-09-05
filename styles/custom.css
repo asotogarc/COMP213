@@ -298,12 +298,15 @@ h1, h2, h3 {
     font-weight: bold;
     color: #007bff;
 }
+
 .gpt-output {
-    background-color: #e8f4ff;
-    border-left: 5px solid #007bff;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 5px;
+    background-color: #800080; /* Un morado similar al de la imagen */
+    color: white;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
 
         .reportview-container {
