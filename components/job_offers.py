@@ -80,6 +80,6 @@ def display_job_offers(data):
                         st.session_state.selected_offer = None
                     else:
                         st.session_state.selected_offer = offer
-                    st.experimental_rerun()
+                    st.rerun()
 
     # No mostramos información adicional de la oferta seleccionada
