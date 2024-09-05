@@ -78,8 +78,7 @@ def display_job_offers(data):
             
             button_text = "Deseleccionar" if is_selected else "Seleccionar oferta"
             if st.button(button_text, key=f"offer_{i}"):
-                if is_selected:
-                    st.session_state.selected_offer = None
-                else:
-                    st.session_state.selected_offer = offer
-                st.rerun()
+                st.session_state.selected_offer = None if is_selected else offer
+
+    # Actualizar el estado sin recargar la página
+    st.write("")  # Este espacio en blanco fuerza una actualización sutil sin recargar toda la página
