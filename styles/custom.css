@@ -162,17 +162,7 @@ h2 {
     text-align: justify; /* Añade esta línea para justificar el texto */
 }
 
-.gpt-output p {
-    text-align: justify; /* Asegura que los párrafos dentro de gpt-output también estén justificados */
-}
-.gpt-output h4 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-.gpt-output p {
-    color: #34495e;
-    line-height: 1.6;
-}
+
 .offer-link {
     color: #2196F3;
     text-decoration: none;
