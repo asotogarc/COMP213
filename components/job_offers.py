@@ -61,7 +61,7 @@ def display_job_offers(data):
             # Usamos un único botón para seleccionar/deseleccionar
             if st.button("Seleccionar" if not is_selected else "Deseleccionar", key=f"offer_{i}"):
                 st.session_state.selected_offer = offer if not is_selected else None
-                st.experimental_rerun()
+                st.rerun()
             
             # La tarjeta ahora es solo visual
             st.markdown(f"""
