@@ -176,10 +176,7 @@ def main():
         # Ejecutar comparación automáticamente al seleccionar oferta y candidatura
         if st.session_state.selected_offer and st.session_state.selected_candidate:
 
-            filtered_offer = remove_stop_words(st.session_state.selected_offer)
-            filtered_candidate = remove_stop_words(st.session_state.selected_candidate)
-
-            similarity, top_terms = calculate_similarity(filtered_offer, filtered_candidate)
+            similarity, top_terms = calculate_similarity(st.session_state.selected_offer, st.session_state.selected_candidate)
 
             
             # Opinión personalizada del GPT
