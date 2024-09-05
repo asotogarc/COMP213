@@ -128,6 +128,24 @@ stop_words = set(stopwords.words('spanish'))
 client = OpenAI(api_key=config.API_KEY)
 
 
+# Descargar stopwords en español
+nltk.download('stopwords')
+stop_words = set(stopwords.words('spanish'))
+
+# ... (other imports and configurations remain the same)
+
+def remove_stop_words(text):
+    words = text.split()
+    filtered_words = [word for word in words if word.lower() not in stop_words]
+    return ' '.join(filtered_words)
+# ... (other imports and configurations remain the same)
+
+def remove_stop_words(text):
+    words = text.split()
+    filtered_words = [word for word in words if word.lower() not in stop_words]
+    return ' '.join(filtered_words)
+
+
 def main():
 
     # Inicializar variables de sesión
@@ -157,8 +175,13 @@ def main():
 
         # Ejecutar comparación automáticamente al seleccionar oferta y candidatura
         if st.session_state.selected_offer and st.session_state.selected_candidate:
-            similarity, top_terms = calculate_similarity(st.session_state.selected_offer, st.session_state.selected_candidate)
 
+            filtered_offer = remove_stop_words(st.session_state.selected_offer)
+            filtered_candidate = remove_stop_words(st.session_state.selected_candidate)
+
+            similarity, top_terms = calculate_similarity(filtered_offer, filtered_candidate)
+
+            
             # Opinión personalizada del GPT
             gpt_opinion_prompt = f"""
             Analiza el texto de la oferta:
