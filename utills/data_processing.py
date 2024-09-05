@@ -20,7 +20,7 @@ def clean_text(text):
 # Comparamos la similitud entre una oferta y una candidatura
 def calculate_similarity(offer, candidate):
     # Clean and combine offer text fields
-    offer_text = clean_text(f"{offer['Formación']} {offer['Conocimientos']} {offer['Experiencia']} {offer['Funciones']}")
+    offer_text = clean_text(f"{offer['Formación']} {offer['Conocimientos']} {offer['Experiencia']} {offer['Funciones']} {offer['Funciones']}")
     
     # Clean and combine candidate text fields
     candidate_text = clean_text(f"{candidate['Formación']} {candidate['Conocimientos']} {candidate['Experiencia']}")
