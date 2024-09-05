@@ -58,14 +58,12 @@ def display_job_offers(data):
             is_selected = st.session_state.selected_offer == offer
             card_class = "card selected" if is_selected else "card"
             
-            # Usamos un botón invisible que cubre toda la tarjeta
-            if st.button("", key=f"offer_{i}", help="Haz clic para seleccionar/deseleccionar"):
-                if is_selected:
-                    st.session_state.selected_offer = None
-                else:
-                    st.session_state.selected_offer = offer
+            # Usamos un único botón para seleccionar/deseleccionar
+            if st.button("Seleccionar" if not is_selected else "Deseleccionar", key=f"offer_{i}"):
+                st.session_state.selected_offer = offer if not is_selected else None
+                st.experimental_rerun()
             
-            # La tarjeta ahora es solo visual, el botón maneja la interacción
+            # La tarjeta ahora es solo visual
             st.markdown(f"""
             <div class="{card_class}">
                 <div class="card-title">{offer['Nombre']}</div>
@@ -73,5 +71,6 @@ def display_job_offers(data):
             </div>
             """, unsafe_allow_html=True)
 
-    # Actualizar el estado sin recargar la página
-    st.empty()  # Este espacio en blanco fuerza una actualización sutil sin recargar toda la página
+    # Mostrar la oferta seleccionada
+    if st.session_state.selected_offer:
+        st.write("Oferta seleccionada:", st.session_state.selected_offer['Nombre'])
