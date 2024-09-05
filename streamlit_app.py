@@ -341,7 +341,7 @@ def main():
         st.markdown("<br><br>", unsafe_allow_html=True)
             # Tabla de comparación detallada
             
-            comparison_df = pd.DataFrame({
+        comparison_df = pd.DataFrame({
                 "Término": [term for term, _ in top_terms],
                 "Puntuación Oferta": [f"{score*100:.2f}%" for _, (score, _) in top_terms],
                 "Puntuación Candidato": [f"{score*100:.2f}%" for _, (_, score) in top_terms],
