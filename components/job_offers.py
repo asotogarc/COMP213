@@ -24,21 +24,28 @@ def display_job_offers(data):
         justify-content: space-between;
     }
     .card-title {
-        height: 80px;  /* Aumentada la altura del título */
+        min-height: 120px;  /* Aumentada la altura mínima del título */
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
         background-color: #007bff;  /* Color de fondo azul */
         border-radius: 5px 5px 0 0;  /* Bordes redondeados solo arriba */
+        padding: 10px;  /* Añadido padding para mejor apariencia */
     }
     .card-title h3 {
+        margin: 0 0 10px 0;  /* Añadido margen inferior */
+        text-align: center;
+        font-size: 18px;  /* Tamaño de la fuente */
+        line-height: 1.3;  /* Espaciado entre líneas */
+        color: white;  /* Color del texto blanco */
+    }
+    .card-title p {
         margin: 0;
         text-align: center;
-        font-size: 18px;  /* Aumentado el tamaño de la fuente */
-        line-height: 1.3;  /* Ajustado el espaciado entre líneas */
-        color: white;  /* Cambiado el color del texto a blanco */
-        padding: 10px;  /* Añadido padding para mejor apariencia */
+        font-size: 14px;  /* Tamaño de la fuente para la formación */
+        line-height: 1.2;  /* Espaciado entre líneas */
+        color: white;  /* Color del texto blanco */
     }
     .card-content {
         height: 60px;
@@ -60,11 +67,12 @@ def display_job_offers(data):
             is_selected = 'selected_offer' in st.session_state and st.session_state.selected_offer == offer
             card_class = "card"
             
-            # Mostrar el nombre de la oferta directamente en la tarjeta con altura fija
+            # Mostrar el nombre de la oferta y la formación en la tarjeta con altura fija
             st.markdown(f"""
             <div class="{card_class}">
                 <div class="card-title">
                     <h3>{offer['Nombre']}</h3>
+                    <p>{offer['Formación']}</p>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -76,13 +84,6 @@ def display_job_offers(data):
                 else:
                     st.session_state.selected_offer = offer
                 st.rerun()
-            
-            with st.expander("Formación necesaria"):
-                st.markdown(f"""
-                <div class="card-content">
-                    <p>{offer['Formación']}</p>
-                </div>
-                """, unsafe_allow_html=True)
             
             with st.expander("Conocimientos requeridos"):
                 st.markdown(f"""
