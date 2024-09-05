@@ -19,33 +19,43 @@ def display_job_offers(data):
     <style>
     .card {
         border: 2px solid #ddd;
+        border-radius: 0;
         padding: 10px;
         margin: 10px;
-        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
     }
     .card.selected {
         border-color: #28a745;
     }
     .card-title {
-        background-color: #007bff;
-        color: white;
-        padding: 10px;
-        border-radius: 5px 5px 0 0;
-        text-align: center;
-    }
-    .card-title h3 {
-        margin: 0 0 10px 0;
         font-size: 18px;
-        line-height: 1.3;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
-    .card-title p {
-        margin: 0;
+    .card-formation {
         font-size: 14px;
-        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+    .card-link {
+        color: white;
+        text-decoration: none;
+    }
+    .card-link:hover {
+        text-decoration: underline;
     }
     .stButton > button {
         width: 100%;
-        margin-top: 10px;
+        background-color: rgba(255,255,255,0.2);
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .stButton > button:hover {
+        background-color: rgba(255,255,255,0.3);
     }
     </style>
     """, unsafe_allow_html=True)
@@ -59,20 +69,16 @@ def display_job_offers(data):
             with st.container():
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <div class="card-title">
-                        <h3>{offer['Nombre']}</h3>
-                        <p>{offer['Formación']}</p>
-                    </div>
+                    <div class="card-title">{offer['Nombre']}</div>
+                    <div class="card-formation">{offer['Formación']} <a href="{offer['URL']}" target="_blank" class="card-link">🔗</a></div>
                 </div>
                 """, unsafe_allow_html=True)
                 
-                if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar Oferta'}", key=f"offer_{i}"):
+                if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar oferta'}", key=f"offer_{i}"):
                     if is_selected:
                         st.session_state.selected_offer = None
                     else:
                         st.session_state.selected_offer = offer
                     st.experimental_rerun()
-                
-                st.markdown(f"[Ver oferta completa]({offer['URL']})", unsafe_allow_html=True)
 
     # No mostramos información adicional de la oferta seleccionada
