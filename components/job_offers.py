@@ -76,10 +76,10 @@ def display_job_offers(data):
             </div>
             """, unsafe_allow_html=True)
             
-            if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar oferta'}", key=f"offer_{i}"):
-                st.session_state.selected_offer = None if is_selected else offer
-
-    # Mostrar información adicional de la oferta seleccionada si es necesario
-    if st.session_state.selected_offer:
-        st.markdown("### Oferta seleccionada")
-        st.write(st.session_state.selected_offer)
+            button_text = "Deseleccionar" if is_selected else "Seleccionar oferta"
+            if st.button(button_text, key=f"offer_{i}"):
+                if is_selected:
+                    st.session_state.selected_offer = None
+                else:
+                    st.session_state.selected_offer = offer
+                st.experimental_rerun()
