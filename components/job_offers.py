@@ -80,11 +80,5 @@ def display_job_offers(data):
             if st.button(button_text, key=f"offer_{i}"):
                 st.session_state.selected_offer = None if is_selected else offer
 
-    # Forzar una actualización sutil
-    st.empty()
-
-    # Mostrar el estado actual (opcional, para depuración)
-    if st.session_state.selected_offer:
-        st.write(f"Oferta seleccionada: {st.session_state.selected_offer['Nombre']}")
-    else:
-        st.write("Ninguna oferta seleccionada")
+    # Actualizar el estado sin recargar la página
+    st.write("")  # Este espacio en blanco fuerza una actualización sutil sin recargar toda la página
