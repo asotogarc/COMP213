@@ -292,7 +292,7 @@ def main():
                 for term, (offer_score, candidate_score) in top_terms
             ]
 
-options = {
+    options = {
     "legend": {
         "data": ["Oferta", "Candidato"],
         "textStyle": {
