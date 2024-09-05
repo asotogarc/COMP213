@@ -28,7 +28,7 @@ def display_job_offers(data):
         transition: border 0.3s ease;
     }
     .card.selected {
-        border: 5px solid #28a745;  /* Borde más grueso y verde para la oferta seleccionada */
+        border: 5px solid #28a745;
     }
     .card-title {
         font-size: 18px;
@@ -61,25 +61,25 @@ def display_job_offers(data):
     </style>
     """, unsafe_allow_html=True)
     
-    cols = st.columns(n_samples)
-    for i, (offer, col) in enumerate(zip(st.session_state.job_offers, cols)):
-        with col:
+    # Crear contenedores para las ofertas
+    offer_containers = st.columns(n_samples)
+    
+    for i, (offer, container) in enumerate(zip(st.session_state.job_offers, offer_containers)):
+        with container:
             is_selected = st.session_state.selected_offer == offer
             card_class = "card selected" if is_selected else "card"
             
-            with st.container():
-                st.markdown(f"""
-                <div class="{card_class}">
-                    <div class="card-title">{offer['Nombre']}</div>
-                    <div class="card-formation">{offer['Formación']} <a href="{offer['URL']}" target="_blank" class="card-link">🔗</a></div>
-                </div>
-                """, unsafe_allow_html=True)
-                
-                if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar oferta'}", key=f"offer_{i}"):
-                    if is_selected:
-                        st.session_state.selected_offer = None
-                    else:
-                        st.session_state.selected_offer = offer
-                    st.rerun()
+            st.markdown(f"""
+            <div class="{card_class}">
+                <div class="card-title">{offer['Nombre']}</div>
+                <div class="card-formation">{offer['Formación']} <a href="{offer['URL']}" target="_blank" class="card-link">🔗</a></div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            if st.button(f"{'Deseleccionar' if is_selected else 'Seleccionar oferta'}", key=f"offer_{i}"):
+                st.session_state.selected_offer = None if is_selected else offer
 
-    # No mostramos información adicional de la oferta seleccionada
+    # Mostrar información adicional de la oferta seleccionada si es necesario
+    if st.session_state.selected_offer:
+        st.markdown("### Oferta seleccionada")
+        st.write(st.session_state.selected_offer)
