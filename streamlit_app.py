@@ -21,7 +21,15 @@ st.markdown("""
 <style>
 
     .gpt-output {
-        text-align: justify;  /* Add this line to justify the text */
+    
+    background-color: #340034 ; /* Un morado similar al de la imagen */
+    color: white;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    
     }
 </style>
 """, unsafe_allow_html=True)
