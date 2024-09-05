@@ -103,7 +103,7 @@ st.markdown("""
         [data-testid="stToolbar"] {visibility: hidden !important;}
 
       .comparison-result {
-        background-color: #F1F3CE;  /* Light blue-gray background */
+        background-color: #3b3d0f ;  /* Light blue-gray background */
         border-radius: 10px;
         padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
