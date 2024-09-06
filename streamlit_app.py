@@ -259,6 +259,9 @@ def main():
             st.markdown("<br><br>", unsafe_allow_html=True)
             st.markdown("<br><br>", unsafe_allow_html=True)
 
+
+            st.markdown('<h2 class="section-title">PESO DE LOS TÉRMINOS MÁS IMPORTANTES</h2>', unsafe_allow_html=True)
+
             # Incluir la idea del radar
             radar_data = [
                 {"name": term, "oferta": offer_score * 100, "candidato": candidate_score * 100}
