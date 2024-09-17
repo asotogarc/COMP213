@@ -142,7 +142,6 @@ st.markdown('<h1 class="main-title">COMPARADOR DE OFERTAS Y CANDIDATURAS DE TRAB
 
 st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown("<br><br>", unsafe_allow_html=True)
-st.markdown("<br><br>", unsafe_allow_html=True)
 
 
 def main():
