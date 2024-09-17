@@ -170,6 +170,7 @@ def main():
 
         display_candidates(candidates_data)
         st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
 
         # Ejecutar comparación automáticamente al seleccionar oferta y candidatura
         if st.session_state.selected_offer and st.session_state.selected_candidate:
